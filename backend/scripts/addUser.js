@@ -20,6 +20,8 @@ async function addUser(username, password) {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  console.log('Generated hashed password:', hashedPassword);
+
   const user = new User({
     username,
     password: hashedPassword,
@@ -29,6 +31,12 @@ async function addUser(username, password) {
   await user.save();
 
   console.log('User added successfully');
+
+  // Retrieve the user from the database to verify the stored hash
+  const storedUser = await User.findOne({ username });
+  console.log('Stored hashed password:', storedUser.password);
+
+  console.log('Username:', username);
   console.log('2FA Secret:', secret.base32);
   
   // Generate QR code
