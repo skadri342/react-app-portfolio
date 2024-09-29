@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import speakeasy from 'speakeasy';
 import qrcode from 'qrcode';
 import User from '../db/models/User.js';
@@ -16,15 +15,9 @@ async function addUser(username, password) {
     name: `Portfolio Website (${username})`
   });
 
-  // Hash the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  console.log('Generated hashed password:', hashedPassword);
-
   const user = new User({
     username,
-    password: hashedPassword,
+    password, // Store the plain password, it will be hashed by the pre-save hook
     twoFactorSecret: secret.base32
   });
 
