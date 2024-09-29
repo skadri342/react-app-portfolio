@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/AdminLogin.css';
 
 function AdminLogin() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    // For now, we'll just navigate to the admin panel without authentication
+    navigate('/admin-panel');
   };
 
   return (
