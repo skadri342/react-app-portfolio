@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import AboutMeAdmin from '../components/AboutMeAdmin';
 import WorkExperienceAdmin from '../components/WorkExperienceAdmin';
 import ProjectsAdmin from '../components/ProjectsAdmin';
@@ -8,7 +9,31 @@ import ResumeUpload from '../components/ResumeUpload';
 import '../css/AdminPanel.css';
 
 function AdminPanel() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedSection, setSelectedSection] = useState('about');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/admin');
+        return;
+      }
+
+      try {
+        await axios.get('http://localhost:3000/api/auth/verify', {
+          headers: { 'x-auth-token': token }
+        });
+        setIsAuthenticated(true);
+      } catch {
+        localStorage.removeItem('token');
+        navigate('/admin');
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   const renderAdminComponent = () => {
     switch (selectedSection) {
@@ -26,6 +51,10 @@ function AdminPanel() {
         return <div>Select a section</div>;
     }
   };
+
+  if (!isAuthenticated) {
+    return <div>You are not authorized to view this page.</div>;
+  }
 
   return (
     <div className="admin-panel">
