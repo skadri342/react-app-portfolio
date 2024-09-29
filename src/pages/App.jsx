@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/App.css';
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
             <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
             <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
             <li><a href="#resume" onClick={(e) => smoothScroll(e, '#resume')}>Resume</a></li>
-            <li><a href="#admin" onClick={(e) => smoothScroll(e, '#admin')}>Admin Login</a></li>
+            <li><Link to="/admin">Admin Login</Link></li>
           </ul>
         </nav>
       </header>
