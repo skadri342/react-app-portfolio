@@ -1,44 +1,44 @@
 body {
     margin: 0;
-    display: flex;
-    place-items: center;
-    padding: 0px 0px;
-}
-
-.admin-login {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100%;
     background-color: #fff;
 }
 
-.login-section {
-    text-align: center;
+.admin-login {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
     width: 100%;
     max-width: 400px;
-    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.login-section h1 {
+.admin-login h2 {
     margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
 }
 
-.login-section form {
+.admin-login form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
+    width: 100%;
 }
 
-.login-section input {
+.admin-login input {
     margin-bottom: 1rem;
     padding: 0.5rem;
     border: 1px solid #000;
     border-radius: 4px;
 }
 
-.login-section button {
+.admin-login button {
     padding: 0.5rem 1rem;
     background-color: #000;
     color: #fff;
@@ -47,8 +47,14 @@ body {
     cursor: pointer;
 }
 
-.login-section button:hover {
+.admin-login button:hover {
     background-color: #333;
+}
+
+.error {
+    color: red;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 .back-button {
