@@ -13,12 +13,33 @@ body {
   line-height: 1.6;
   color: #000;
   background-color: #fff;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .app {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+  .app {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  .app {
+    max-width: 100%;
+    padding: 0 10px;
+  }
 }
 
 /* Header Styles */
@@ -60,7 +81,8 @@ section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
 }
 
 h1,
