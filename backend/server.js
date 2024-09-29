@@ -13,8 +13,14 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
+// Test API
 app.get('/', (req, res) => {
     res.send('API is running...');
+});
+
+// Test message to frontend
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'Hello from the backend!' });
 });
 
 const PORT = process.env.PORT || 3000;
