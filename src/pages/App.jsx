@@ -1,43 +1,92 @@
 import { useState, useEffect } from 'react';
-import reactLogo from '../assets/react.svg';
-import viteLogo from '/vite.svg';
 import '../css/App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [backendMessage, setBackendMessage] = useState('');
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/test')
-      .then(response => response.json())
-      .then(data => setBackendMessage(data.message))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < lastScrollY) {
+        setIsHeaderVisible(true);
+      } else if (currentScrollY > 100) {
+        setIsHeaderVisible(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  const smoothScroll = (e, target) => {
+    e.preventDefault();
+    const element = document.querySelector(target);
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <p>{backendMessage}</p> {/* Display the backend message */}
-    </>
+    <div className="app">
+      <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'}`}>
+        <nav>
+          <ul>
+            <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
+            <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Work Experience</a></li>
+            <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
+            <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
+            <li><a href="#resume" onClick={(e) => smoothScroll(e, '#resume')}>Resume</a></li>
+            <li><a href="#admin" onClick={(e) => smoothScroll(e, '#admin')}>Admin Login</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section id="welcome" className="welcome-section">
+          <h1>Welcome to My Portfolio</h1>
+          <p>A brief welcome message and introduction.</p>
+        </section>
+
+        <section id="about" className="about-section">
+          <div className="bio">
+            <h2>About Me</h2>
+            <p>A more detailed biography goes here.</p>
+          </div>
+          <div className="profile-image">
+            <img src="/path/to/your/image.jpg" alt="Your Name" />
+          </div>
+        </section>
+
+        <section id="experience" className="experience-section">
+          <h2>Work Experience</h2>
+          <div className="job">
+            <h3>Job Title at Company</h3>
+            <p>Duration</p>
+            <p>Job description</p>
+          </div>
+          {/* Add more job divs as needed */}
+        </section>
+
+        <section id="projects" className="projects-section">
+          <h2>My Projects</h2>
+          <div className="project">
+            <h3>Project Title</h3>
+            <p>Project description</p>
+          </div>
+          {/* Add more project divs as needed */}
+        </section>
+
+        <section id="contact" className="contact-section">
+          <h2>Get in Touch</h2>
+          <form>
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </section>
+      </main>
+    </div>
   );
 }
 
