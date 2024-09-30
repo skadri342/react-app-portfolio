@@ -4,6 +4,7 @@ import axios from 'axios';
 function WorkExperienceAdmin() {
   const [experiences, setExperiences] = useState([]);
   const [newExperience, setNewExperience] = useState({ title: '', company: '', duration: '', description: '' });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchExperiences();
@@ -15,32 +16,43 @@ function WorkExperienceAdmin() {
       setExperiences(response.data);
     } catch (error) {
       console.error('Error fetching work experiences:', error);
+      setError('Failed to fetch work experiences');
     }
   };
 
   const handleAddExperience = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/workExperience', newExperience);
+      const token = localStorage.getItem('token');
+      const response = await axios.post('http://localhost:3000/api/workExperience', newExperience, {
+        headers: { 'x-auth-token': token }
+      });
+      console.log('New experience added:', response.data);
       setNewExperience({ title: '', company: '', duration: '', description: '' });
       fetchExperiences();
     } catch (error) {
-      console.error('Error adding work experience:', error);
+      console.error('Error adding work experience:', error.response?.data || error.message);
+      setError('Failed to add work experience');
     }
   };
 
   const handleDeleteExperience = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/workExperience/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:3000/api/workExperience/${id}`, {
+        headers: { 'x-auth-token': token }
+      });
       fetchExperiences();
     } catch (error) {
-      console.error('Error deleting work experience:', error);
+      console.error('Error deleting work experience:', error.response?.data || error.message);
+      setError('Failed to delete work experience');
     }
   };
 
   return (
     <div className="work-experience-admin">
       <h2>Edit Work Experiences</h2>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleAddExperience}>
         <input
           value={newExperience.title}

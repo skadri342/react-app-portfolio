@@ -1,5 +1,5 @@
 import express from 'express';
-import WorkExperience from '../models/WorkExperience.js';
+import WorkExperience from '../db/models/WorkExperience.js';
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
