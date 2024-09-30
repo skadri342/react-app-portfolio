@@ -5,6 +5,23 @@ import '../css/App.css';
 function App() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [selectedJob, setSelectedJob] = useState(0);
+
+  const workExperiences = [
+    {
+      company: "Company A",
+      title: "Software Developer",
+      duration: "Jan 2020 - Present",
+      description: "Worked on various projects using React and Node.js. Implemented new features and improved existing codebase."
+    },
+    {
+      company: "Company B",
+      title: "Junior Developer",
+      duration: "Jun 2018 - Dec 2019",
+      description: "Assisted in developing and maintaining web applications. Collaborated with senior developers on large-scale projects."
+    },
+    // Add more work experiences as needed
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,12 +77,25 @@ function App() {
 
         <section id="experience" className="experience-section">
           <h2>Work Experience</h2>
-          <div className="job">
-            <h3>Job Title at Company</h3>
-            <p>Duration</p>
-            <p>Job description</p>
+          <div className="experience-container">
+            <div className="experience-selector">
+              {workExperiences.map((job, index) => (
+                <div 
+                  key={index} 
+                  className={`job-selector ${selectedJob === index ? 'active' : ''}`}
+                  onClick={() => setSelectedJob(index)}
+                >
+                  {job.company}
+                </div>
+              ))}
+            </div>
+            <div className="experience-details">
+              <h3>{workExperiences[selectedJob].company}</h3>
+              <h4>{workExperiences[selectedJob].title}</h4>
+              <p className="duration">{workExperiences[selectedJob].duration}</p>
+              <p>{workExperiences[selectedJob].description}</p>
+            </div>
           </div>
-          {/* Add more job divs as needed */}
         </section>
 
         <section id="projects" className="projects-section">
