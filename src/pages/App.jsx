@@ -1,27 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../css/App.css';
 
 function App() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [selectedJob, setSelectedJob] = useState(0);
+  const [workExperiences, setWorkExperiences] = useState([]);
 
-  const workExperiences = [
-    {
-      company: "Company A",
-      title: "Software Developer",
-      duration: "Jan 2020 - Present",
-      description: "Worked on various projects using React and Node.js. Implemented new features and improved existing codebase."
-    },
-    {
-      company: "Company B",
-      title: "Junior Developer",
-      duration: "Jun 2018 - Dec 2019",
-      description: "Assisted in developing and maintaining web applications. Collaborated with senior developers on large-scale projects."
-    },
-    // Add more work experiences as needed
-  ];
+  useEffect(() => {
+    const fetchWorkExperiences = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/workExperience');
+        setWorkExperiences(response.data);
+      } catch (error) {
+        console.error('Error fetching work experiences:', error);
+      }
+    };
+
+    fetchWorkExperiences();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,12 +88,14 @@ function App() {
                 </div>
               ))}
             </div>
-            <div className="experience-details">
-              <h3>{workExperiences[selectedJob].company}</h3>
-              <h4>{workExperiences[selectedJob].title}</h4>
-              <p className="duration">{workExperiences[selectedJob].duration}</p>
-              <p>{workExperiences[selectedJob].description}</p>
-            </div>
+            {workExperiences.length > 0 && (
+              <div className="experience-details">
+                <h3>{workExperiences[selectedJob].company}</h3>
+                <h4>{workExperiences[selectedJob].title}</h4>
+                <p className="duration">{workExperiences[selectedJob].duration}</p>
+                <p>{workExperiences[selectedJob].description}</p>
+              </div>
+            )}
           </div>
         </section>
 
