@@ -8,6 +8,7 @@ function App() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [selectedJob, setSelectedJob] = useState(0);
   const [workExperiences, setWorkExperiences] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [showMoreProjects, setShowMoreProjects] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,17 @@ function App() {
       }
     };
 
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/projects');
+        setProjects(response.data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
     fetchWorkExperiences();
+    fetchProjects();
   }, []);
 
   useEffect(() => {
@@ -37,50 +48,6 @@ function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
-
-  // Placeholder data for projects
-  const featuredProjects = [
-    {
-      title: "Featured Project 1",
-      description: "This is a description of the first featured project. It showcases various technologies and skills.",
-      technologies: ["React", "Node.js", "MongoDB"],
-      image: "/path/to/project1-image.jpg",
-      github: "https://github.com/yourusername/project1",
-      external: "https://project1-demo.com"
-    },
-    {
-      title: "Featured Project 2",
-      description: "This is a description of the second featured project. It demonstrates different aspects of web development.",
-      technologies: ["Vue.js", "Express", "PostgreSQL"],
-      image: "/path/to/project2-image.jpg",
-      github: "https://github.com/yourusername/project2",
-      external: "https://project2-demo.com"
-    }
-  ];
-
-  const moreProjects = [
-    {
-      title: "Project 3",
-      description: "A brief description of Project 3.",
-      technologies: ["Python", "Django", "React"],
-      github: "https://github.com/yourusername/project3",
-      external: "https://project3-demo.com"
-    },
-    {
-      title: "Project 4",
-      description: "A brief description of Project 4.",
-      technologies: ["JavaScript", "Three.js", "WebGL"],
-      github: "https://github.com/yourusername/project4",
-      external: "https://project4-demo.com"
-    },
-    {
-      title: "Project 5",
-      description: "A brief description of Project 5.",
-      technologies: ["TypeScript", "Angular", "Firebase"],
-      github: "https://github.com/yourusername/project5",
-      external: "https://project5-demo.com"
-    }
-  ];
 
   const smoothScroll = (e, target) => {
     e.preventDefault();
@@ -105,8 +72,8 @@ function App() {
 
       <main>
         <section id="welcome" className="welcome-section">
-          <h1>sdagdfshdsfjdsjfsjgsgjsfdgjfdj</h1>
-          <p>Hi</p>
+          <h1>Welcome to My Portfolio</h1>
+          <p>Hi, I'm [Your Name]. I'm a [Your Profession/Title].</p>
         </section>
 
         <section id="about" className="about-section">
@@ -149,8 +116,8 @@ function App() {
           
           <div className="featured-projects">
             <h3>Featured Projects</h3>
-            {featuredProjects.map((project, index) => (
-              <div key={index} className={`featured-project ${index % 2 === 0 ? 'even' : 'odd'}`}>
+            {projects.filter(project => project.isFeatured).map((project, index) => (
+              <div key={project._id} className={`featured-project ${index % 2 === 0 ? 'even' : 'odd'}`}>
                 <div className="project-content">
                   <h4>{project.title}</h4>
                   <p>{project.description}</p>
@@ -160,14 +127,16 @@ function App() {
                     ))}
                   </div>
                   <div className="project-links">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      {/* Placeholder for GitHub logo */}
-                      <span className="icon github-icon">GitHub</span>
-                    </a>
-                    <a href={project.external} target="_blank" rel="noopener noreferrer">
-                      {/* Placeholder for external link logo */}
-                      <span className="icon external-link-icon">External</span>
-                    </a>
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <span className="icon github-icon">GitHub</span>
+                      </a>
+                    )}
+                    {project.external && (
+                      <a href={project.external} target="_blank" rel="noopener noreferrer">
+                        <span className="icon external-link-icon">External</span>
+                      </a>
+                    )}
                   </div>
                 </div>
                 <div className="project-image">
@@ -180,8 +149,8 @@ function App() {
           <div className="more-projects">
             <h3>More Projects</h3>
             <div className="projects-grid">
-              {moreProjects.slice(0, showMoreProjects ? moreProjects.length : 2).map((project, index) => (
-                <div key={index} className="project-card">
+              {projects.filter(project => !project.isFeatured).slice(0, showMoreProjects ? projects.length : 2).map((project) => (
+                <div key={project._id} className="project-card">
                   <h4>{project.title}</h4>
                   <p>{project.description}</p>
                   <div className="technologies">
@@ -190,14 +159,16 @@ function App() {
                     ))}
                   </div>
                   <div className="project-links">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      {/* Placeholder for GitHub logo */}
-                      <span className="icon github-icon">GitHub</span>
-                    </a>
-                    <a href={project.external} target="_blank" rel="noopener noreferrer">
-                      {/* Placeholder for external link logo */}
-                      <span className="icon external-link-icon">External</span>
-                    </a>
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <span className="icon github-icon">GitHub</span>
+                      </a>
+                    )}
+                    {project.external && (
+                      <a href={project.external} target="_blank" rel="noopener noreferrer">
+                        <span className="icon external-link-icon">External</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
