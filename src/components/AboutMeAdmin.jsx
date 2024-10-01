@@ -1,16 +1,30 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AdminContext } from '../context/AdminContext';
 import '../css/AdminComponents.css';
 
 function AboutMeAdmin() {
-  const [welcomeText, setWelcomeText] = useState('Welcome to My Portfolio');
-  const [briefBio, setBriefBio] = useState('A brief welcome message and introduction.');
-  const [detailedBio, setDetailedBio] = useState('A more detailed biography goes here.');
+  const { welcomeContent, aboutContent, updateWelcomeAndAbout } = useContext(AdminContext);
+  
+  const [welcomeForm, setWelcomeForm] = useState(welcomeContent);
+  const [aboutForm, setAboutForm] = useState(aboutContent);
   const [profileImage, setProfileImage] = useState('/path/to/your/image.jpg');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Submitted:', { welcomeText, briefBio, detailedBio, profileImage });
+    updateWelcomeAndAbout(welcomeForm, aboutForm);
+    alert('Changes saved successfully!');
+  };
+
+  const handleWelcomeChange = (e) => {
+    setWelcomeForm({ ...welcomeForm, [e.target.name]: e.target.value });
+  };
+
+  const handleAboutChange = (e) => {
+    if (e.target.name === 'skills') {
+      setAboutForm({ ...aboutForm, skills: e.target.value.split(',').map(skill => skill.trim()) });
+    } else {
+      setAboutForm({ ...aboutForm, [e.target.name]: e.target.value });
+    }
   };
 
   const handleImageChange = (e) => {
@@ -26,31 +40,72 @@ function AboutMeAdmin() {
 
   return (
     <div className="about-me-admin">
-      <h2>Edit About Me</h2>
+      <h2>Edit Welcome and About Me</h2>
       <form onSubmit={handleSubmit}>
+        <h3>Welcome Section</h3>
         <div>
-          <label htmlFor="welcomeText">Welcome Text:</label>
+          <label htmlFor="greeting">Greeting:</label>
           <input
-            id="welcomeText"
-            value={welcomeText}
-            onChange={(e) => setWelcomeText(e.target.value)}
+            id="greeting"
+            name="greeting"
+            value={welcomeForm.greeting}
+            onChange={handleWelcomeChange}
           />
         </div>
         <div>
-          <label htmlFor="briefBio">Brief Bio:</label>
-          <textarea
-            id="briefBio"
-            value={briefBio}
-            onChange={(e) => setBriefBio(e.target.value)}
+          <label htmlFor="name">Name:</label>
+          <input
+            id="name"
+            name="name"
+            value={welcomeForm.name}
+            onChange={handleWelcomeChange}
           />
         </div>
         <div>
-          <label htmlFor="detailedBio">Detailed Bio:</label>
+          <label htmlFor="title">Title:</label>
+          <input
+            id="title"
+            name="title"
+            value={welcomeForm.title}
+            onChange={handleWelcomeChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
           <textarea
-            id="detailedBio"
-            value={detailedBio}
-            onChange={(e) => setDetailedBio(e.target.value)}
-            rows="6"
+            id="description"
+            name="description"
+            value={welcomeForm.description}
+            onChange={handleWelcomeChange}
+          />
+        </div>
+
+        <h3>About Me Section</h3>
+        <div>
+          <label htmlFor="aboutTitle">About Title:</label>
+          <input
+            id="aboutTitle"
+            name="title"
+            value={aboutForm.title}
+            onChange={handleAboutChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="aboutDescription">About Description:</label>
+          <textarea
+            id="aboutDescription"
+            name="description"
+            value={aboutForm.description}
+            onChange={handleAboutChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="skills">Skills (comma-separated):</label>
+          <input
+            id="skills"
+            name="skills"
+            value={aboutForm.skills.join(', ')}
+            onChange={handleAboutChange}
           />
         </div>
         <div>

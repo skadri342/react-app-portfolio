@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { AdminContext } from '../context/AdminContext';
 import '../css/App.css';
 
 function App() {
+  const { welcomeContent, aboutContent } = useContext(AdminContext);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [selectedJob, setSelectedJob] = useState(0);
@@ -72,14 +74,21 @@ function App() {
 
       <main>
         <section id="welcome" className="welcome-section">
-          <h1>Hi asgfsa,dgl</h1>
-          <p>dfsjhdsgfjfghkhgjlhgfjfjk</p>
+          <p>{welcomeContent.greeting}</p>
+          <h1>{welcomeContent.name}</h1>
+          <h1>{welcomeContent.title}</h1>
+          <p>{welcomeContent.description}</p>
         </section>
 
         <section id="about" className="about-section">
           <div className="bio">
-            <h2>About Me</h2>
-            <p>A more detailed biography goes here.</p>
+            <h2>{aboutContent.title}</h2>
+            <p>{aboutContent.description}</p>
+            <ul>
+              {aboutContent.skills.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
           </div>
           <div className="profile-image">
             <img src="/path/to/your/image.jpg" alt="Your Name" />
