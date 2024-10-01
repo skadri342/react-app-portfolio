@@ -72,8 +72,8 @@ function App() {
 
       <main>
         <section id="welcome" className="welcome-section">
-          <h1>Welcome to My Portfolio</h1>
-          <p>Hi, I'm [Your Name]. I'm a [Your Profession/Title].</p>
+          <h1>Hi asgfsa,dgl</h1>
+          <p>dfsjhdsgfjfghkhgjlhgfjfjk</p>
         </section>
 
         <section id="about" className="about-section">

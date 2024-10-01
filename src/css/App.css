@@ -23,6 +23,9 @@ body {
 
 main {
   padding: 0 150px;
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+  /* Adjust based on your header height */
 }
 
 .app {
@@ -97,7 +100,6 @@ h2 {
 /* Welcome Section Styles */
 .welcome-section {
   text-align: center;
-  margin-top: 415vh;
 }
 
 /* About Section Styles */
