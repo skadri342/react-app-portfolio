@@ -82,8 +82,8 @@ section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center;
+  align-items: center;
 }
 
 h1,
@@ -91,13 +91,13 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/* #TODO: Check welcome section for responsiveness on smaller viewing screens/different devices. */
-
+/* Welcome Section Styles */
 .welcome-section {
   text-align: center;
-  margin-top: 400vh;
+  margin-top: 415vh;
 }
 
+/* About Section Styles */
 .about-section {
   display: flex;
   align-items: center;
@@ -163,7 +163,7 @@ h2 {
   color: #888;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for experience section */
 @media (max-width: 768px) {
   .experience-container {
     flex-direction: column;
@@ -187,9 +187,129 @@ h2 {
   }
 }
 
-.job,
-.project {
-  margin-bottom: 2rem;
+/* Projects Section Styles */
+.projects-section {
+  padding: 4rem 0;
+}
+
+.featured-projects,
+.more-projects {
+  margin-bottom: 4rem;
+}
+
+.featured-project {
+  display: flex;
+  margin-bottom: 4rem;
+  align-items: center;
+}
+
+.featured-project.even {
+  flex-direction: row-reverse;
+}
+
+.project-content,
+.project-image {
+  flex: 1;
+  padding: 1rem;
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.technologies {
+  margin: 1rem 0;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.show-more-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.5rem 1rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.show-more-btn:hover {
+  background-color: #333;
+}
+
+.archive-link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.archive-link a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.archive-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for projects section */
+@media (max-width: 768px) {
+  .featured-project {
+    flex-direction: column;
+  }
+
+  .featured-project.even {
+    flex-direction: column;
+  }
+
+  .project-content,
+  .project-image {
+    width: 100%;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }
 
 /* Contact Form Styles */
