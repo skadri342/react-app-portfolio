@@ -21,10 +21,6 @@ body {
   align-items: center;
 }
 
-main {
-  margin-top: 400vh;
-}
-
 .app {
   max-width: 100%;
   margin: 0 auto;
@@ -99,6 +95,7 @@ h2 {
 
 .welcome-section {
   text-align: center;
+  margin-top: 400vh;
 }
 
 .about-section {
