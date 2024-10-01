@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: auto;
+  width: 100%;
 }
 
 html {
@@ -21,10 +21,13 @@ body {
   align-items: center;
 }
 
+main {
+  padding: 0 150px;
+}
+
 .app {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 150px;
 }
 
 /* Media query for tablets and smaller screens */

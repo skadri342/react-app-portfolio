@@ -99,7 +99,7 @@ body {
 .projects-admin {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: fit-content;
 }
 
 .project-form {
