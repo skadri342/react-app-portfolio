@@ -1,46 +1,68 @@
-import { useState, useContext } from 'react';
-import { AdminContext } from '../context/AdminContext';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../css/AdminComponents.css';
 
 function AboutMeAdmin() {
-  const { welcomeContent, aboutContent, updateWelcomeAndAbout } = useContext(AdminContext);
-  
-  const [welcomeForm, setWelcomeForm] = useState(welcomeContent);
-  const [aboutForm, setAboutForm] = useState(aboutContent);
-  const [profileImage, setProfileImage] = useState('/path/to/your/image.jpg');
+  const [welcomeContent, setWelcomeContent] = useState({
+    greeting: '',
+    name: '',
+    title: '',
+    description: ''
+  });
+  const [aboutContent, setAboutContent] = useState({
+    title: '',
+    description: '',
+    skills: [],
+    profileImageUrl: ''
+  });
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    fetchAboutMeData();
+  }, []);
+
+  const fetchAboutMeData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/aboutMe');
+      setWelcomeContent(response.data.welcomeContent);
+      setAboutContent(response.data.aboutContent);
+    } catch (err) {
+      console.error('Error fetching AboutMe data:', err);
+      setError('Failed to fetch AboutMe data');
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateWelcomeAndAbout(welcomeForm, aboutForm);
-    alert('Changes saved successfully!');
+    try {
+      const token = localStorage.getItem('token');
+      await axios.put('http://localhost:3000/api/aboutMe', 
+        { welcomeContent, aboutContent },
+        { headers: { 'x-auth-token': token } }
+      );
+      alert('Changes saved successfully!');
+    } catch (err) {
+      console.error('Error updating AboutMe data:', err);
+      setError('Failed to update AboutMe data');
+    }
   };
 
   const handleWelcomeChange = (e) => {
-    setWelcomeForm({ ...welcomeForm, [e.target.name]: e.target.value });
+    setWelcomeContent({ ...welcomeContent, [e.target.name]: e.target.value });
   };
 
   const handleAboutChange = (e) => {
     if (e.target.name === 'skills') {
-      setAboutForm({ ...aboutForm, skills: e.target.value.split(',').map(skill => skill.trim()) });
+      setAboutContent({ ...aboutContent, skills: e.target.value.split(',').map(skill => skill.trim()) });
     } else {
-      setAboutForm({ ...aboutForm, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setAboutContent({ ...aboutContent, [e.target.name]: e.target.value });
     }
   };
 
   return (
     <div className="about-me-admin">
       <h2>Edit Welcome and About Me</h2>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <h3>Welcome Section</h3>
         <div>
@@ -48,7 +70,7 @@ function AboutMeAdmin() {
           <input
             id="greeting"
             name="greeting"
-            value={welcomeForm.greeting}
+            value={welcomeContent.greeting}
             onChange={handleWelcomeChange}
           />
         </div>
@@ -57,7 +79,7 @@ function AboutMeAdmin() {
           <input
             id="name"
             name="name"
-            value={welcomeForm.name}
+            value={welcomeContent.name}
             onChange={handleWelcomeChange}
           />
         </div>
@@ -66,7 +88,7 @@ function AboutMeAdmin() {
           <input
             id="title"
             name="title"
-            value={welcomeForm.title}
+            value={welcomeContent.title}
             onChange={handleWelcomeChange}
           />
         </div>
@@ -75,7 +97,7 @@ function AboutMeAdmin() {
           <textarea
             id="description"
             name="description"
-            value={welcomeForm.description}
+            value={welcomeContent.description}
             onChange={handleWelcomeChange}
           />
         </div>
@@ -86,7 +108,7 @@ function AboutMeAdmin() {
           <input
             id="aboutTitle"
             name="title"
-            value={aboutForm.title}
+            value={aboutContent.title}
             onChange={handleAboutChange}
           />
         </div>
@@ -95,7 +117,7 @@ function AboutMeAdmin() {
           <textarea
             id="aboutDescription"
             name="description"
-            value={aboutForm.description}
+            value={aboutContent.description}
             onChange={handleAboutChange}
           />
         </div>
@@ -104,24 +126,19 @@ function AboutMeAdmin() {
           <input
             id="skills"
             name="skills"
-            value={aboutForm.skills.join(', ')}
+            value={aboutContent.skills.join(', ')}
             onChange={handleAboutChange}
           />
         </div>
         <div>
-          <label htmlFor="profileImage">Profile Image:</label>
+          <label htmlFor="profileImageUrl">Profile Image URL:</label>
           <input
-            type="file"
-            id="profileImage"
-            accept="image/*"
-            onChange={handleImageChange}
+            id="profileImageUrl"
+            name="profileImageUrl"
+            value={aboutContent.profileImageUrl}
+            onChange={handleAboutChange}
           />
         </div>
-        {profileImage && (
-          <div className="image-preview">
-            <img src={profileImage} alt="Profile Preview" />
-          </div>
-        )}
         <button type="submit">Save Changes</button>
       </form>
     </div>

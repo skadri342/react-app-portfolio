@@ -1,11 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { AdminContext } from '../context/AdminContext';
 import '../css/App.css';
 
 function App() {
-  const { welcomeContent, aboutContent } = useContext(AdminContext);
+  const [welcomeContent, setWelcomeContent] = useState({
+    greeting: '',
+    name: '',
+    title: '',
+    description: ''
+  });
+  const [aboutContent, setAboutContent] = useState({
+    title: '',
+    description: '',
+    skills: [],
+    profileImageUrl: ''
+  });
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [selectedJob, setSelectedJob] = useState(0);
@@ -14,26 +24,24 @@ function App() {
   const [showMoreProjects, setShowMoreProjects] = useState(false);
 
   useEffect(() => {
-    const fetchWorkExperiences = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/workExperience');
-        setWorkExperiences(response.data);
+        const [aboutMeResponse, workExperienceResponse, projectsResponse] = await Promise.all([
+          axios.get('http://localhost:3000/api/aboutMe'),
+          axios.get('http://localhost:3000/api/workExperience'),
+          axios.get('http://localhost:3000/api/projects')
+        ]);
+
+        setWelcomeContent(aboutMeResponse.data.welcomeContent);
+        setAboutContent(aboutMeResponse.data.aboutContent);
+        setWorkExperiences(workExperienceResponse.data);
+        setProjects(projectsResponse.data);
       } catch (error) {
-        console.error('Error fetching work experiences:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    const fetchProjects = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/projects');
-        setProjects(response.data);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-      }
-    };
-
-    fetchWorkExperiences();
-    fetchProjects();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -91,7 +99,7 @@ function App() {
             </ul>
           </div>
           <div className="profile-image">
-            <img src="/path/to/your/image.jpg" alt="Your Name" />
+            <img src={aboutContent.profileImageUrl} alt="Profile" />
           </div>
         </section>
 
