@@ -65,7 +65,7 @@ function App() {
             <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
             <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
             <li><a href="#resume" onClick={(e) => smoothScroll(e, '#resume')}>Resume</a></li>
-            <li><Link to="/admin">Admin Login</Link></li>
+            <li><Link to="/admin-panel">Admin</Link></li>
           </ul>
         </nav>
       </header>
