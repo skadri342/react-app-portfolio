@@ -60,8 +60,8 @@ function App() {
 
       <main>
         <section id="welcome" className="welcome-section">
-          <h1>Welcome to My Portfolio</h1>
-          <p>A brief welcome message and introduction.</p>
+          <h1>sdagdfshdsfjdsjfsjgsgjsfdgjfdj</h1>
+          <p>Hi</p>
         </section>
 
         <section id="about" className="about-section">
