@@ -89,7 +89,7 @@ body {
 /* Messages Admin specific styles */
 .experience-jobs-container {
     gap: 1rem;
-    width: 450px;
+    width: 500px;
 }
 
 .experience-job {
@@ -198,6 +198,11 @@ body {
 
     .admin-main {
         margin-left: 0;
+    }
+
+    .experience-jobs-container {
+        gap: 1rem;
+        width: 450px;
     }
 
     .messages-admin {
