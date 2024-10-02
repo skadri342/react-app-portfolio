@@ -80,9 +80,9 @@ function WorkExperienceAdmin() {
         />
         <button type="submit">Add Experience</button>
       </form>
-      <div>
+      <div className='experience-jobs-container'>
         {experiences.map((exp) => (
-          <div key={exp._id}>
+          <div className='experience-job' key={exp._id}>
             <h3>{exp.title} at {exp.company}</h3>
             <p>{exp.duration}</p>
             <p>{exp.description}</p>
