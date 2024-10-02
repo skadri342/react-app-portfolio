@@ -28,6 +28,28 @@ function App() {
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState(null);
+  const EducationItem = ({ institution, duration, major, description }) => (
+    <div className="education-item">
+      <h3>{institution}</h3>
+      <p className="duration">{duration}</p>
+      <h4>{major}</h4>
+      <p>{description}</p>
+    </div>
+  );
+  const educationData = [
+    {
+      institution: "University of Example",
+      duration: "2016 - 2020",
+      major: "Bachelor of Science in Computer Science",
+      description: "Focused on software engineering and data structures. Participated in various coding competitions and hackathons."
+    },
+    {
+      institution: "Example Community College",
+      duration: "2014 - 2016",
+      major: "Associate's Degree in Information Technology",
+      description: "Learned fundamentals of programming and computer networks. Completed a capstone project on web development."
+    }
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -147,6 +169,15 @@ function App() {
                 <p>{workExperiences[selectedJob].description}</p>
               </div>
             )}
+          </div>
+        </section>
+
+        <section id="education" className="education-section">
+          <h2>Education</h2>
+          <div className="education-container">
+            {educationData.map((edu, index) => (
+              <EducationItem key={index} {...edu} />
+            ))}
           </div>
         </section>
 
