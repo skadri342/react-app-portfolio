@@ -1,27 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../css/AdminComponents.css';
 
 function ResumeUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [resumeUrl, setResumeUrl] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetchResumeUrl();
+  }, []);
+
+  const fetchResumeUrl = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/resume/url');
+      setResumeUrl(response.data.url);
+    } catch (error) {
+      console.error('Error fetching resume URL:', error);
+    }
+  };
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = (event) => {
+  const handleUpload = async (event) => {
     event.preventDefault();
-    // Here you would typically send the file to your backend
-    console.log('Uploading file:', selectedFile);
-    // Reset the form after upload
-    setSelectedFile(null);
-    event.target.reset();
-  };
+    if (!selectedFile) {
+      setError('Please select a file');
+      return;
+    }
 
-  const handleVisibilityToggle = () => {
-    setIsVisible(!isVisible);
-    // Here you would typically update the visibility status in your backend
-    console.log('Resume visibility toggled:', !isVisible);
+    const formData = new FormData();
+    formData.append('resume', selectedFile);
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:3000/api/resume/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'x-auth-token': token
+        }
+      });
+      setError('');
+      setSelectedFile(null);
+      fetchResumeUrl();
+    } catch (error) {
+      console.error('Error uploading resume:', error);
+      setError('Failed to upload resume');
+    }
   };
 
   return (
@@ -31,24 +58,19 @@ function ResumeUpload() {
         <input 
           type="file" 
           onChange={handleFileChange} 
-          accept=".pdf,.doc,.docx"
+          accept=".pdf"
         />
         <button type="submit" disabled={!selectedFile}>
           Upload Resume
         </button>
       </form>
-      <div className="resume-visibility">
-        <h3>Resume Visibility</h3>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={isVisible} 
-            onChange={handleVisibilityToggle}
-          />
-          Make Resume Visible
-        </label>
-      </div>
-      {/* You can add a list of uploaded resumes here in the future */}
+      {error && <p className="error">{error}</p>}
+      {resumeUrl && (
+        <div>
+          <h3>Current Resume</h3>
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer">View Resume</a>
+        </div>
+      )}
     </div>
   );
 }

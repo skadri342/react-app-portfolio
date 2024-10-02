@@ -22,6 +22,7 @@ function App() {
   const [workExperiences, setWorkExperiences] = useState([]);
   const [projects, setProjects] = useState([]);
   const [showMoreProjects, setShowMoreProjects] = useState(false);
+  const [resumeUrl, setResumeUrl] = useState('');
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -87,6 +88,20 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    // ... (other useEffect logic)
+    const fetchResumeUrl = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/resume/url');
+        // Make sure this points to your backend URL
+        setResumeUrl(`http://localhost:3000${response.data.url}`);
+      } catch (error) {
+        console.error('Error fetching resume URL:', error);
+      }
+    };
+    fetchResumeUrl();
+  }, []);
+
   const smoothScroll = (e, target) => {
     e.preventDefault();
     const element = document.querySelector(target);
@@ -118,7 +133,7 @@ function App() {
             <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Work Experience</a></li>
             <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
             <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
-            <li><a href="#resume" onClick={(e) => smoothScroll(e, '#resume')}>Resume</a></li>
+            <li>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
             <li><Link to="/admin-panel">Admin</Link></li>
           </ul>
         </nav>
