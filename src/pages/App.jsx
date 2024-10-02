@@ -22,6 +22,12 @@ function App() {
   const [workExperiences, setWorkExperiences] = useState([]);
   const [projects, setProjects] = useState([]);
   const [showMoreProjects, setShowMoreProjects] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +69,22 @@ function App() {
     e.preventDefault();
     const element = document.querySelector(target);
     element.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactChange = (e) => {
+    setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:3000/api/messages', contactForm);
+      setSubmitStatus('success');
+      setContactForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitStatus('error');
+    }
   };
   
   return (
@@ -202,12 +224,34 @@ function App() {
 
         <section id="contact" className="contact-section">
           <h2>Get in Touch</h2>
-          <form>
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="email" name="email" placeholder="Your Email" required />
-            <textarea name="message" placeholder="Your Message" required></textarea>
+          <form onSubmit={handleContactSubmit}>
+            <input
+              type="text"
+              name="name"
+              value={contactForm.name}
+              onChange={handleContactChange}
+              placeholder="Your Name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              value={contactForm.email}
+              onChange={handleContactChange}
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              value={contactForm.message}
+              onChange={handleContactChange}
+              placeholder="Your Message"
+              required
+            />
             <button type="submit">Send Message</button>
           </form>
+          {submitStatus === 'success' && <p>Message sent successfully!</p>}
+          {submitStatus === 'error' && <p>Error sending message. Please try again.</p>}
         </section>
       </main>
     </div>
