@@ -30,6 +30,7 @@ router.post('/upload', auth, upload.single('resume'), (req, res) => {
 router.get('/url', (req, res) => {
   const filePath = path.join(process.cwd(), 'uploads', 'resume.pdf');
   if (fs.existsSync(filePath)) {
+    // Return a relative URL
     res.json({ url: '/api/resume/download' });
   } else {
     res.status(404).send('Resume not found');

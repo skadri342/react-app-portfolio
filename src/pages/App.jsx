@@ -89,7 +89,6 @@ function App() {
   }, [lastScrollY]);
 
   useEffect(() => {
-    // ... (other useEffect logic)
     const fetchResumeUrl = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/resume/url');

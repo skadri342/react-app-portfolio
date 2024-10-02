@@ -14,9 +14,11 @@ function ResumeUpload() {
   const fetchResumeUrl = async () => {
     try {
       const response = await axios.get('http://localhost:3000/api/resume/url');
-      setResumeUrl(response.data.url);
+      // Construct the full URL
+      setResumeUrl(`http://localhost:3000${response.data.url}`);
     } catch (error) {
       console.error('Error fetching resume URL:', error);
+      setError('Failed to fetch resume URL');
     }
   };
 
@@ -44,7 +46,7 @@ function ResumeUpload() {
       });
       setError('');
       setSelectedFile(null);
-      fetchResumeUrl();
+      fetchResumeUrl(); // Fetch the new URL after successful upload
     } catch (error) {
       console.error('Error uploading resume:', error);
       setError('Failed to upload resume');
