@@ -66,6 +66,21 @@ function MessagesAdmin() {
     }
   };
 
+  const handlePermanentDelete = async (messageId) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:3000/api/messages/${messageId}`, {
+        headers: { 'x-auth-token': token }
+      });
+      fetchMessages();
+      if (selectedMessage && selectedMessage._id === messageId) {
+        setSelectedMessage(null);
+      }
+    } catch (error) {
+      console.error('Error permanently deleting message:', error);
+    }
+  };
+
   const filteredMessages = messages.filter(message => {
     if (activeTab === 'unread') return !message.isRead && !message.isDeleted;
     if (activeTab === 'deleted') return message.isDeleted;
@@ -105,9 +120,12 @@ function MessagesAdmin() {
             <p>{message.message.substring(0, 50)}...</p>
             <span>{new Date(message.timestamp).toLocaleString()}</span>
             {activeTab !== 'deleted' ? (
-              <button onClick={() => handleDeleteMessage(message._id)}>Delete</button>
+              <button onClick={(e) => { e.stopPropagation(); handleDeleteMessage(message._id); }}>Delete</button>
             ) : (
-              <button onClick={() => handleRestoreMessage(message._id)}>Restore</button>
+              <>
+                <button onClick={(e) => { e.stopPropagation(); handleRestoreMessage(message._id); }}>Restore</button>
+                <button onClick={(e) => { e.stopPropagation(); handlePermanentDelete(message._id); }}>Delete Permanently</button>
+              </>
             )}
           </div>
         ))}
