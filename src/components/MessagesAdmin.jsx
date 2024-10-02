@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/AdminComponents.css';
 
 function MessagesAdmin() {
   const [messages, setMessages] = useState([]);
@@ -67,21 +66,6 @@ function MessagesAdmin() {
     }
   };
 
-  const handlePermanentDelete = async (messageId) => {
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/messages/${messageId}`, {
-        headers: { 'x-auth-token': token }
-      });
-      fetchMessages();
-      if (selectedMessage && selectedMessage._id === messageId) {
-        setSelectedMessage(null);
-      }
-    } catch (error) {
-      console.error('Error permanently deleting message:', error);
-    }
-  };
-
   const filteredMessages = messages.filter(message => {
     if (activeTab === 'unread') return !message.isRead && !message.isDeleted;
     if (activeTab === 'deleted') return message.isDeleted;
@@ -92,22 +76,38 @@ function MessagesAdmin() {
     <div className="messages-admin">
       <div className="messages-list">
         <div className="messages-tabs">
-          <button onClick={() => setActiveTab('unread')} className={activeTab === 'unread' ? 'active' : ''}>Unread</button>
-          <button onClick={() => setActiveTab('all')} className={activeTab === 'all' ? 'active' : ''}>All Messages</button>
-          <button onClick={() => setActiveTab('deleted')} className={activeTab === 'deleted' ? 'active' : ''}>Deleted</button>
+          <button 
+            onClick={() => setActiveTab('unread')} 
+            className={activeTab === 'unread' ? 'active' : ''}
+          >
+            Unread
+          </button>
+          <button 
+            onClick={() => setActiveTab('all')} 
+            className={activeTab === 'all' ? 'active' : ''}
+          >
+            All
+          </button>
+          <button 
+            onClick={() => setActiveTab('deleted')} 
+            className={activeTab === 'deleted' ? 'active' : ''}
+          >
+            Deleted
+          </button>
         </div>
         {filteredMessages.map(message => (
-          <div key={message._id} className={`message-item ${!message.isRead ? 'unread' : ''}`} onClick={() => handleMessageClick(message)}>
+          <div 
+            key={message._id} 
+            className={`message-item ${!message.isRead ? 'unread' : ''}`}
+            onClick={() => handleMessageClick(message)}
+          >
             <h4>{message.name}</h4>
             <p>{message.message.substring(0, 50)}...</p>
             <span>{new Date(message.timestamp).toLocaleString()}</span>
             {activeTab !== 'deleted' ? (
               <button onClick={() => handleDeleteMessage(message._id)}>Delete</button>
             ) : (
-              <>
-                <button onClick={() => handleRestoreMessage(message._id)}>Restore</button>
-                <button onClick={() => handlePermanentDelete(message._id)}>Delete Permanently</button>
-              </>
+              <button onClick={() => handleRestoreMessage(message._id)}>Restore</button>
             )}
           </div>
         ))}
