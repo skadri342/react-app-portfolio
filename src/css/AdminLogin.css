@@ -23,6 +23,8 @@ body {
     margin-bottom: 2rem;
     text-align: center;
     width: 100%;
+    color: #000000;
+    /* Ensure the heading is black */
 }
 
 .admin-login form {
@@ -36,6 +38,13 @@ body {
     padding: 0.5rem;
     border: 1px solid #000;
     border-radius: 4px;
+    color: #000000;
+    /* Ensure the input text is black */
+}
+
+.admin-login input::placeholder {
+    color: #999999;
+    /* Light grey color for placeholder text */
 }
 
 .admin-login button {
@@ -55,22 +64,6 @@ body {
     color: red;
     margin-bottom: 1rem;
     text-align: center;
-}
-
-.admin-login-page {
-    color: #000000;
-}
-
-.admin-login-page .admin-login {
-    color: #000000;
-}
-
-.admin-login-page .admin-login input {
-    color: #000000;
-}
-
-.admin-login-page .error {
-    color: #ff0000;
 }
 
 .back-button {
