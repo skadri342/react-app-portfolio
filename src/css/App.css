@@ -30,7 +30,25 @@ main {
   max-width: 100%;
   margin: 0 auto;
   height: calc(100vh);
-  /* Adjust based on your header height */
+  position: relative;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image) !important;
+  background-size: cover;
+  background-position: 0 40%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }
 
 /* Media query for tablets and smaller screens */
@@ -55,7 +73,7 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
@@ -91,6 +109,8 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
 }
 
 h1,
@@ -108,6 +128,8 @@ h2 {
   display: flex;
   align-items: center;
   gap: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0 4rem;
 }
 
 .profile-image img {
@@ -117,7 +139,8 @@ h2 {
 
 /* Work Experience Section Styles */
 .experience-section {
-  padding: 4rem 0;
+  padding: 4rem 4rem;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .experience-container {
@@ -142,12 +165,12 @@ h2 {
 
 .job-selector.active {
   border-left-color: #000;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
   font-weight: bold;
 }
 
 .job-selector:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .experience-details {
@@ -195,7 +218,7 @@ h2 {
 
 /* Education Section Styles */
 .education-section {
-  padding: 4rem 0;
+  padding: 4rem 4rem;
 }
 
 .education-container {
@@ -206,7 +229,7 @@ h2 {
 .education-item {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: #f9f9f9;
+  background-color: rgba(249, 249, 249, 0.8);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -248,7 +271,8 @@ h2 {
 
 /* Projects Section Styles */
 .projects-section {
-  padding: 4rem 0;
+  padding: 4rem 4rem;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .featured-projects,
@@ -284,7 +308,7 @@ h2 {
 
 .tech-tag {
   display: inline-block;
-  background-color: #f0f0f0;
+  background-color: rgba(240, 240, 240, 0.8);
   padding: 0.25rem 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
@@ -309,7 +333,7 @@ h2 {
 }
 
 .project-card {
-  background-color: #f9f9f9;
+  background-color: rgba(249, 249, 249, 0.8);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -351,6 +375,10 @@ h2 {
   text-decoration: underline;
 }
 
+.contact-section {
+  padding: 4rem 4rem;
+}
+
 /* Responsive adjustments for projects section */
 @media (max-width: 768px) {
   .featured-project {
@@ -377,6 +405,9 @@ form {
   flex-direction: column;
   max-width: 500px;
   margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 input,
