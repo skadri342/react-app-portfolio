@@ -4,9 +4,6 @@ import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
 
-// Import your background image
-
-
 function App() {
   const [welcomeContent, setWelcomeContent] = useState({
     greeting: '',
@@ -33,6 +30,7 @@ function App() {
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const educationData = [
     {
@@ -83,6 +81,13 @@ function App() {
         setIsHeaderVisible(false);
       }
       setLastScrollY(currentScrollY);
+
+      // New code for header transparency
+      if (currentScrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -127,7 +132,7 @@ function App() {
     <div className="app">
       <div className="background"></div>
       <div className="content">
-        <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'}`}>
+        <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'} ${isScrolled ? 'scrolled' : ''}`}>
           <nav>
             <ul>
               <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
