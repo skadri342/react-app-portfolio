@@ -1,36 +1,49 @@
-.about-me-admin,
-.work-experience-admin,
-.projects-admin,
-.messages-admin,
-.resume-upload {
+/* Wrapper class for all admin components */
+.admin-panel-page {
+    color: #000000;
+}
+
+.admin-panel-page .about-me-admin,
+.admin-panel-page .work-experience-admin,
+.admin-panel-page .projects-admin,
+.admin-panel-page .messages-admin,
+.admin-panel-page .resume-upload {
     padding: 1rem;
 }
 
-form {
+.admin-panel-page form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
 }
 
-label {
+.admin-panel-page label {
     font-weight: bold;
+    color: #000000;
 }
 
-input,
-textarea {
+.admin-panel-page input,
+.admin-panel-page textarea {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    color: #000000;
+    background-color: #ffffff;
 }
 
-textarea {
+.admin-panel-page input::placeholder,
+.admin-panel-page textarea::placeholder {
+    color: #999999;
+}
+
+.admin-panel-page textarea {
     min-height: 100px;
     resize: vertical;
 }
 
-.admin-main button {
+.admin-panel-page .admin-main button {
     padding: 0.5rem 1rem;
     background-color: #000;
     color: #fff;
@@ -39,43 +52,53 @@ textarea {
     cursor: pointer;
 }
 
-.admin-main button:hover {
+.admin-panel-page .admin-main button:hover {
     background-color: #333;
 }
 
-.admin-main button:disabled {
+.admin-panel-page .admin-main button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.message {
+.admin-panel-page .message {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
+    color: #000000;
 }
 
-.resume-visibility {
+.admin-panel-page .resume-visibility {
     margin-top: 1rem;
 }
 
-.resume-visibility label {
+.admin-panel-page .resume-visibility label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.resume-visibility input[type="checkbox"] {
+.admin-panel-page .resume-visibility input[type="checkbox"] {
     width: auto;
 }
 
-.image-preview {
+.admin-panel-page .image-preview {
     margin-top: 1rem;
 }
 
-.image-preview img {
+.admin-panel-page .image-preview img {
     max-width: 200px;
     max-height: 200px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.admin-panel-page .projects-list,
+.admin-panel-page .experience-jobs-container {
+    color: #000000;
+}
+
+.admin-panel-page .error {
+    color: #ff0000;
 }

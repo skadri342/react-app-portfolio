@@ -57,47 +57,49 @@ function AdminPanel() {
   }
 
   return (
-    <div className="admin-panel">
-      <header className="admin-header">
-        <h1>Admin Panel</h1>
-        <Link to="/" className="user-view-button">Back to User View</Link>
-      </header>
-      <div className="admin-content">
-        <nav className="admin-nav">
-          <button 
-            onClick={() => setSelectedSection('about')}
-            className={selectedSection === 'about' ? 'active' : ''}
-          >
-            About Me
-          </button>
-          <button 
-            onClick={() => setSelectedSection('experience')}
-            className={selectedSection === 'experience' ? 'active' : ''}
-          >
-            Work Experiences
-          </button>
-          <button 
-            onClick={() => setSelectedSection('projects')}
-            className={selectedSection === 'projects' ? 'active' : ''}
-          >
-            Projects
-          </button>
-          <button 
-            onClick={() => setSelectedSection('messages')}
-            className={selectedSection === 'messages' ? 'active' : ''}
-          >
-            Messages
-          </button>
-          <button 
-            onClick={() => setSelectedSection('resume')}
-            className={selectedSection === 'resume' ? 'active' : ''}
-          >
-            Resume
-          </button>
-        </nav>
-        <main className="admin-main">
-          {renderAdminComponent()}
-        </main>
+    <div className='admin-panel-page'>
+      <div className="admin-panel">
+        <header className="admin-header">
+          <h1>Admin Panel</h1>
+          <Link to="/" className="user-view-button">Back to User View</Link>
+        </header>
+        <div className="admin-content">
+          <nav className="admin-nav">
+            <button 
+              onClick={() => setSelectedSection('about')}
+              className={selectedSection === 'about' ? 'active' : ''}
+            >
+              About Me
+            </button>
+            <button 
+              onClick={() => setSelectedSection('experience')}
+              className={selectedSection === 'experience' ? 'active' : ''}
+            >
+              Work Experiences
+            </button>
+            <button 
+              onClick={() => setSelectedSection('projects')}
+              className={selectedSection === 'projects' ? 'active' : ''}
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => setSelectedSection('messages')}
+              className={selectedSection === 'messages' ? 'active' : ''}
+            >
+              Messages
+            </button>
+            <button 
+              onClick={() => setSelectedSection('resume')}
+              className={selectedSection === 'resume' ? 'active' : ''}
+            >
+              Resume
+            </button>
+          </nav>
+          <main className="admin-main">
+            {renderAdminComponent()}
+          </main>
+        </div>
       </div>
     </div>
   );

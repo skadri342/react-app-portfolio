@@ -12,8 +12,8 @@ html {
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  color: #000;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: transparent;
   height: 100%;
   margin: 0;
   display: flex;
@@ -43,6 +43,17 @@ main {
   background-size: cover;
   background-position: 0 40%;
   background-repeat: no-repeat;
+  z-index: -2;
+}
+
+.background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 
@@ -73,7 +84,8 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(76, 0, 130, 0.2);
+  /* Semi-transparent Indigo */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
@@ -97,8 +109,13 @@ nav ul {
 
 nav ul li a {
   text-decoration: none;
-  color: #000;
+  color: #FFFFFF;  /* White text */
   font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #FFD700;
+  /* Gold text on hover */
 }
 
 /* Section Styles */
@@ -109,8 +126,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
+  background-color: transparent;
 }
 
 h1,
@@ -128,7 +144,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 2rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: transparent;
   padding: 0 4rem;
 }
 
@@ -140,7 +156,7 @@ h2 {
 /* Work Experience Section Styles */
 .experience-section {
   padding: 4rem 4rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: transparent;
 }
 
 .experience-container {
@@ -164,13 +180,13 @@ h2 {
 }
 
 .job-selector.active {
-  border-left-color: #000;
-  background-color: rgba(0, 0, 0, 0.1);
+  border-left-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
   font-weight: bold;
 }
 
 .job-selector:hover {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .experience-details {
@@ -183,13 +199,13 @@ h2 {
 
 .experience-details h4 {
   margin-bottom: 0.25rem;
-  color: #666;
+  color: #ccc;
 }
 
 .experience-details .duration {
   font-style: italic;
   margin-bottom: 1rem;
-  color: #888;
+  color: #aaa;
 }
 
 /* Responsive adjustments for experience section */
@@ -212,13 +228,14 @@ h2 {
 
   .job-selector.active {
     border-left-color: transparent;
-    border-bottom-color: #000;
+    border-bottom-color: #fff;
   }
 }
 
 /* Education Section Styles */
 .education-section {
   padding: 4rem 4rem;
+  background-color: transparent;
 }
 
 .education-container {
@@ -229,7 +246,7 @@ h2 {
 .education-item {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: rgba(249, 249, 249, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -237,24 +254,24 @@ h2 {
 .education-item h3 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-  color: #333;
+  color: #fff;
 }
 
 .education-item .duration {
   font-style: italic;
-  color: #666;
+  color: #ccc;
   margin-bottom: 0.5rem;
 }
 
 .education-item h4 {
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  color: #444;
+  color: #eee;
 }
 
 .education-item p {
   font-size: 0.9rem;
-  color: #555;
+  color: #ddd;
   line-height: 1.4;
 }
 
@@ -272,7 +289,7 @@ h2 {
 /* Projects Section Styles */
 .projects-section {
   padding: 4rem 4rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: transparent;
 }
 
 .featured-projects,
@@ -308,7 +325,7 @@ h2 {
 
 .tech-tag {
   display: inline-block;
-  background-color: rgba(240, 240, 240, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 0.25rem 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
@@ -323,7 +340,7 @@ h2 {
 
 .icon {
   font-size: 1.5rem;
-  color: #333;
+  color: #fff;
 }
 
 .projects-grid {
@@ -333,7 +350,7 @@ h2 {
 }
 
 .project-card {
-  background-color: rgba(249, 249, 249, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -348,7 +365,7 @@ h2 {
   display: block;
   margin: 2rem auto 0;
   padding: 0.5rem 1rem;
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -357,7 +374,7 @@ h2 {
 }
 
 .show-more-btn:hover {
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .archive-link {
@@ -366,7 +383,7 @@ h2 {
 }
 
 .archive-link a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
 }
@@ -377,26 +394,7 @@ h2 {
 
 .contact-section {
   padding: 4rem 4rem;
-}
-
-/* Responsive adjustments for projects section */
-@media (max-width: 768px) {
-  .featured-project {
-    flex-direction: column;
-  }
-
-  .featured-project.even {
-    flex-direction: column;
-  }
-
-  .project-content,
-  .project-image {
-    width: 100%;
-  }
-
-  .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
+  background-color: transparent;
 }
 
 /* Contact Form Styles */
@@ -405,7 +403,7 @@ form {
   flex-direction: column;
   max-width: 500px;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
 }
@@ -414,13 +412,20 @@ input,
 textarea {
   margin-bottom: 1rem;
   padding: 0.5rem;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 button {
   padding: 0.5rem 1rem;
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -428,5 +433,5 @@ button {
 }
 
 button:hover {
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.3);
 }

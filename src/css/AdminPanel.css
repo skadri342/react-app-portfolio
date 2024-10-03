@@ -86,6 +86,22 @@ body {
     height: calc(100vh - 60px);
 }
 
+.admin-panel-page {
+    color: #000000;
+}
+
+.admin-panel-page .admin-header h1 {
+    color: #000000;
+}
+
+.admin-panel-page .admin-nav button {
+    color: #000000;
+}
+
+.admin-panel-page .admin-main {
+    color: #000000;
+}
+
 /* Messages Admin specific styles */
 .experience-jobs-container {
     gap: 1rem;

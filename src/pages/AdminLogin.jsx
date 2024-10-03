@@ -24,34 +24,36 @@ function AdminLogin() {
   };
 
   return (
-    <div className="admin-login">
-      <h2>Admin Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="2FA Token"
-          value={twoFactorToken}
-          onChange={(e) => setTwoFactorToken(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      <Link to="/" className="back-button">Back to Home</Link>
+    <div className='admin-login-page'>
+      <div className="admin-login">
+        <h2>Admin Login</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="2FA Token"
+            value={twoFactorToken}
+            onChange={(e) => setTwoFactorToken(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        <Link to="/" className="back-button">Back to Home</Link>
+      </div>
     </div>
   );
 }
