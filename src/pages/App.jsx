@@ -106,6 +106,25 @@ function App() {
     fetchResumeUrl();
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    });
+
+    const hiddenElements = document.querySelectorAll('.fade-section');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      hiddenElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   const smoothScroll = (e, target) => {
     e.preventDefault();
     const element = document.querySelector(target);
@@ -146,14 +165,14 @@ function App() {
         </header>
 
         <main>
-          <section id="welcome" className="welcome-section">
+          <section id="welcome" className="welcome-section fade-section">
             <p>{welcomeContent.greeting}</p>
-            <h1>{welcomeContent.name}</h1>
-            <h1>{welcomeContent.title}</h1>
-            <p>{welcomeContent.description}</p>
+            <h1 className='big-heading'>{welcomeContent.name}</h1>
+            <h1 className='medium-heading'>{welcomeContent.title}</h1>
+            <p className='small-heading'>{welcomeContent.description}</p>
           </section>
 
-          <section id="about" className="about-section">
+          <section id="about" className="about-section fade-section">
             <div className="bio">
               <h2>{aboutContent.title}</h2>
               <p>{aboutContent.description}</p>
@@ -168,7 +187,7 @@ function App() {
             </div>
           </section>
 
-          <section id="experience" className="experience-section">
+          <section id="experience" className="experience-section fade-section">
             <h2>Work Experience</h2>
             <div className="experience-container">
               <div className="experience-selector">
@@ -193,7 +212,7 @@ function App() {
             </div>
           </section>
 
-          <section id="education" className="education-section">
+          <section id="education" className="education-section fade-section">
             <h2>Education</h2>
             <div className="education-container">
               {educationData.map((edu, index) => (
@@ -207,7 +226,7 @@ function App() {
             </div>
           </section>
 
-          <section id="projects" className="projects-section">
+          <section id="projects" className="projects-section fade-section">
             <h2>My Projects</h2>
             
             <div className="featured-projects">
@@ -279,7 +298,7 @@ function App() {
             </div>
           </section>
 
-          <section id="contact" className="contact-section">
+          <section id="contact" className="contact-section fade-section">
             <h2>Get in Touch</h2>
             <form onSubmit={handleContactSubmit}>
               <input
