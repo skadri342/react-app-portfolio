@@ -176,14 +176,20 @@ function App() {
             <div className="bio">
               <h2>{aboutContent.title}</h2>
               <p>{aboutContent.description}</p>
-              <ul>
+              <ul className='skills-list'>
                 {aboutContent.skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
                 ))}
               </ul>
             </div>
-            <div className="profile-image">
-              <img src={aboutContent.profileImageUrl} alt="Profile" />
+            <div className='profile-image'>
+              <div className="profile-image-wrapper">
+                {aboutContent.profileImageUrl ? (
+                  <img src={aboutContent.profileImageUrl} alt="Profile" />
+                ) : (
+                  <div style={{ width: '100%', height: '100%', backgroundColor: 'rgba(100, 255, 218, 0.1)' }}></div>
+                )}
+              </div>
             </div>
           </section>
 
@@ -260,7 +266,9 @@ function App() {
                 </div>
               ))}
             </div>
-            
+          </section>
+
+          <section id='project' className='projects-section'>
             <div className="more-projects">
               <h3>More Projects</h3>
               <div className="projects-grid">
