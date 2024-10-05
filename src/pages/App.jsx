@@ -36,6 +36,14 @@ function App() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = isMenuOpen ? 'visible' : 'hidden';
+  };
+
+  const closeMenu = (e) => {
+    if (isMenuOpen && e.target.classList.contains('menu-overlay')) {
+      setIsMenuOpen(false);
+      document.body.style.overflow = 'visible';
+    }
   };
 
   const educationData = [
@@ -76,6 +84,11 @@ function App() {
     };
 
     fetchData();
+
+    // Clean up the body overflow style when component unmounts
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
   }, []);
 
   useEffect(() => {
@@ -88,7 +101,6 @@ function App() {
       }
       setLastScrollY(currentScrollY);
 
-      // New code for header transparency
       if (currentScrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -135,6 +147,8 @@ function App() {
     e.preventDefault();
     const element = document.querySelector(target);
     element.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'visible';
   };
 
   const handleContactChange = (e) => {
@@ -154,7 +168,7 @@ function App() {
   };
   
   return (
-    <div className="app">
+    <div className={`app ${isMenuOpen ? 'menu-open' : ''}`}>
       <div className="background"></div>
       <div className="content">
         <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'} ${isScrolled ? 'scrolled' : ''}`}>
@@ -179,6 +193,8 @@ function App() {
             </button>
           </div>
         </header>
+
+        <div className="menu-overlay" onClick={closeMenu}></div>
 
         <main>
           <section id="welcome" className="welcome-section fade-section">

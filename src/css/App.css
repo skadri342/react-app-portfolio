@@ -188,6 +188,7 @@ main {
 .logo-link {
   display: flex;
   align-items: center;
+  width: auto;
 }
 
 .logo {
@@ -225,6 +226,9 @@ nav ul li a:hover {
   border: none;
   cursor: pointer;
   padding: 0;
+  z-index: 1002;
+  /* Ensure it's above the overlay */
+
 }
 
 .menu-toggle span {
@@ -234,6 +238,22 @@ nav ul li a:hover {
   background-color: #FFFFFF;
   margin: 5px 0;
   transition: all 0.3s ease;
+}
+
+.menu-toggle:focus {
+  outline: none;
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
 }
 
 @media (max-width: 768px) {
@@ -249,6 +269,7 @@ nav ul li a:hover {
     height: 100vh;
     background-color: rgba(52, 44, 76, 0.9);
     transition: right 0.3s ease;
+    z-index: 1001;
   }
 
   nav.open {
@@ -258,6 +279,7 @@ nav ul li a:hover {
   nav ul {
     flex-direction: column;
     padding: 2rem;
+    padding-top: 4rem;
   }
 
   nav ul li {
@@ -266,13 +288,21 @@ nav ul li a:hover {
 
   .menu-toggle {
     display: block;
-    z-index: 1001;
     width: auto;
-    padding-right: 2rem;
+    margin-right: 2rem;
   }
 
   .menu-toggle:hover {
     background-color: transparent;
+  }
+
+  .app.menu-open .menu-overlay {
+    display: block;
+    z-index: 999;
+  }
+
+  .app.menu-open .content > *:not(.app-header):not(.menu-overlay) {
+    filter: blur(5px);
   }
 
   nav.open+.menu-toggle span:nth-child(1) {
