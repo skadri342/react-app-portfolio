@@ -212,7 +212,11 @@ function App() {
                   <h3>{workExperiences[selectedJob].company}</h3>
                   <h4>{workExperiences[selectedJob].title}</h4>
                   <p className="duration">{workExperiences[selectedJob].duration}</p>
-                  <p>{workExperiences[selectedJob].description}</p>
+                  <ul className='experience-detail-points'>
+                    {workExperiences[selectedJob].descriptionPoints.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>

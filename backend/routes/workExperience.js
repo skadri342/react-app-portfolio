@@ -20,12 +20,31 @@ router.post('/', auth, async (req, res) => {
     title: req.body.title,
     company: req.body.company,
     duration: req.body.duration,
-    description: req.body.description
+    descriptionPoints: req.body.descriptionPoints
   });
 
   try {
     const newExperience = await experience.save();
     res.status(201).json(newExperience);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Update a work experience (protected route)
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const updatedExperience = await WorkExperience.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        company: req.body.company,
+        duration: req.body.duration,
+        descriptionPoints: req.body.descriptionPoints
+      },
+      { new: true }
+    );
+    res.json(updatedExperience);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

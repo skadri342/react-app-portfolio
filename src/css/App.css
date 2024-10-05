@@ -92,6 +92,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .app {
@@ -138,7 +139,8 @@ main {
   }
 
   main {
-    padding: 0;
+    padding: 0 50px;
+    width: 100%;
   }
 }
 
@@ -340,6 +342,10 @@ h2 {
     width: 250px;
     height: 250px;
   }
+
+  .welcome-section {
+    padding: 0 50px;
+  }
 }
 
 /* Work Experience Section Styles */
@@ -352,7 +358,7 @@ h2 {
 
 .experience-container {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -361,6 +367,15 @@ h2 {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 3;
+  width: max-content;
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  font-family: var(--font-sans);
+  font-size: var(--fz-xl);
+  line-height: 1.3;
 }
 
 .job-selector {
@@ -368,6 +383,23 @@ h2 {
   cursor: pointer;
   border-left: 3px solid transparent;
   transition: all 0.3s ease;
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  position: relative;
+  transition: var(--transition);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  height: var(--tab-height);
+  padding: 0px 20px 2px;
+  border-left: 2px solid var(--lightest-navy);
+  background-color: transparent;
+  color: var(--slate);
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  text-align: left;
+    white-space: nowrap;
 }
 
 .job-selector.active {
@@ -386,12 +418,41 @@ h2 {
 
 .experience-details h3 {
   margin-bottom: 0.5rem;
+  position: relative;
+  width: 100%;
 }
 
 .experience-details h4 {
   margin-bottom: 0.25rem;
   color: #ccc;
 }
+
+.experience-detail-points {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+  color: var(--slate);
+  font-family: var(--font-sans);
+  font-size: var(--fz-md);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+.experience-detail-points li::before {
+  content: '▹';
+  position: absolute;
+  left: 10px;
+  color: var(--green);
+  font-size: var(--fz-sm);
+  line-height: 12px;
+}
+
+.experience-detail-points li::marker {
+  content: none;
+}
+
 
 .experience-details .duration {
   font-style: italic;
@@ -409,6 +470,7 @@ h2 {
     flex-direction: row;
     overflow-x: auto;
     margin-bottom: 1rem;
+    align-self: center;
   }
 
   .job-selector {
