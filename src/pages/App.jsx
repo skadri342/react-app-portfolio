@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
+import logo from '../assets/case-upper.png';
 
 function App() {
   const [welcomeContent, setWelcomeContent] = useState({
@@ -31,6 +32,11 @@ function App() {
   });
   const [submitStatus, setSubmitStatus] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const educationData = [
     {
@@ -152,16 +158,26 @@ function App() {
       <div className="background"></div>
       <div className="content">
         <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'} ${isScrolled ? 'scrolled' : ''}`}>
-          <nav>
-            <ul>
-              <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
-              <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Work Experience</a></li>
-              <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
-              <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
-              <li>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
-              <li><Link to="/admin-panel">Admin</Link></li>
-            </ul>
-          </nav>
+          <div className="header-content">
+            <Link to="/" className="logo-link">
+              <img src={logo} alt="Logo" className="logo" />
+            </Link>
+            <nav className={isMenuOpen ? 'open' : ''}>
+              <ul>
+                <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Work Experience</a></li>
+                <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
+                <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
+                <li>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
+                <li><Link to="/admin-panel">Admin</Link></li>
+              </ul>
+            </nav>
+            <button className="menu-toggle" onClick={toggleMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </header>
 
         <main>

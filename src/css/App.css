@@ -178,11 +178,33 @@ main {
   transform: translateY(0);
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
 nav ul {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
-  padding: 1rem 0;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin-left: 2rem;
 }
 
 nav ul li a {
@@ -195,6 +217,75 @@ nav ul li a {
 nav ul li a:hover {
   color: #FFD700;
   /* Gold text on hover */
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #FFFFFF;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 1rem;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(52, 44, 76, 0.9);
+    transition: right 0.3s ease;
+  }
+
+  nav.open {
+    right: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  nav ul li {
+    margin: 1rem 0;
+  }
+
+  .menu-toggle {
+    display: block;
+    z-index: 1001;
+    width: auto;
+    padding-right: 2rem;
+  }
+
+  .menu-toggle:hover {
+    background-color: transparent;
+  }
+
+  nav.open+.menu-toggle span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  nav.open+.menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  nav.open+.menu-toggle span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
 }
 
 /* Section Styles */
@@ -320,6 +411,7 @@ h2 {
   content: '▹';
   position: absolute;
   left: 0;
+  top: 4px;
   color: var(--green);
   font-size: var(--fz-sm);
   line-height: 12px;
@@ -333,7 +425,6 @@ h2 {
     gap: 2rem;
   }
 
-  .bio,
   .profile-image {
     max-width: 100%;
   }
@@ -447,6 +538,7 @@ h2 {
   color: var(--green);
   font-size: var(--fz-sm);
   line-height: 12px;
+  margin-top: 4px;
 }
 
 .experience-detail-points li::marker {
