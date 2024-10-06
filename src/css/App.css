@@ -697,6 +697,20 @@ h2 {
   flex-direction: column;
 }
 
+.project-image {
+  direction: ltr;
+}
+
+/* Alternate direction for even-numbered project images */
+.featured-project:nth-child(even) .project-image {
+  direction: rtl;
+}
+
+/* Alternate direction for odd-numbered project images */
+.featured-project:nth-child(odd) .project-image {
+  direction: ltr;
+}
+
 .project-content.align-right {
   align-items: flex-end;
   text-align: end;
@@ -759,8 +773,9 @@ h2 {
 
 .image-overlay img {
   width: 100%;
-  height: auto;
+  height: 26rem;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .technologies {
