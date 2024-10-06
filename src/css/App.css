@@ -158,7 +158,7 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(33, 28, 46, 0);
+  background-color: rgba(42, 35, 60, 0);
   box-shadow: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-in-out;
   z-index: 1000;
@@ -166,7 +166,7 @@ main {
 }
 
 .app-header.scrolled {
-  background-color: rgba(33, 28, 46, 1);
+  background-color: rgba(42, 35, 60, 1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -670,6 +670,10 @@ h2 {
   max-width: 1000px;
 }
 
+.projects-section h2 {
+  padding: 0 1rem;
+}
+
 .featured-projects,
 .more-projects {
   margin-bottom: 4rem;
@@ -709,14 +713,46 @@ h2 {
   min-height: 5rem;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: rgba(33, 28, 46, 1);
+  background-color: rgba(69, 34, 52, 1);
 }
 
 .project-image img {
-  max-width: 120%;
   height: auto;
   border-radius: 8px;
+}
+
+.image-overlay {
+  position: relative;
+  z-index: 5;
+  max-width: 120%;
   width: 120%;
+  line-height: 0;
+  border-radius: 8px;
+}
+
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(42, 35, 60, 0.7);
+  /* Adjust color and opacity as needed */
+  transition: background-color 0.3s ease;
+  border-radius: 8px;
+}
+
+.image-overlay:hover::after {
+  background-color: rgba(42, 35, 60, 0);
+  /* Fully transparent on hover */
+  border-radius: 8px;
+}
+
+.image-overlay img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .technologies {
@@ -790,7 +826,7 @@ h2 {
 .archive-link {
   text-align: center;
   margin-top: 2rem;
-  content: hidden;
+  content-visibility: hidden;
 }
 
 .archive-link a {
@@ -806,6 +842,10 @@ h2 {
 .contact-section {
   padding: 4rem 4rem;
   background-color: transparent;
+}
+
+.contact-section h2 {
+  width: max-content;
 }
 
 /* Contact Form Styles */

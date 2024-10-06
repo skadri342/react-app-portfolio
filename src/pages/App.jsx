@@ -48,7 +48,7 @@ function App() {
 
   const educationData = [
     {
-      institution: "Toronto Metropolitan University (formerly Ryerson University)",
+      institution: "Toronto Metropolitan University",
       duration: "2020 - 2025",
       major: "Bachelor of Engineering in Computer Engineering",
       description: "Focused on software engineering, microcontrollers, system design and data structures. Participated in various labs and practical hands on experience. Completed capstone project on Medical Image Diagnosis Tool using AI and Machine Learning."
@@ -297,7 +297,9 @@ function App() {
                     </div>
                   </div>
                   <div className="project-image">
-                    <img src={project.image} alt={project.title} />
+                    <div className='image-overlay'>
+                      <img src={project.image} alt={project.title} />
+                    </div>
                   </div>
                 </div>
               ))}
