@@ -45,4 +45,22 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// Update a project
+router.put('/:id', auth, async (req, res) => {
+  try {
+    const { title, description, technologies, image, github, external, isFeatured } = req.body;
+    const updatedProject = await Project.findByIdAndUpdate(
+      req.params.id,
+      { title, description, technologies, image, github, external, isFeatured },
+      { new: true, runValidators: true }
+    );
+    if (!updatedProject) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
+    res.json(updatedProject);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export default router;
