@@ -48,16 +48,16 @@ function App() {
 
   const educationData = [
     {
-      institution: "University of Example",
-      duration: "2016 - 2020",
-      major: "Bachelor of Science in Computer Science",
-      description: "Focused on software engineering and data structures. Participated in various coding competitions and hackathons."
+      institution: "Toronto Metropolitan University (formerly Ryerson University)",
+      duration: "2020 - 2025",
+      major: "Bachelor of Engineering in Computer Engineering",
+      description: "Focused on software engineering, microcontrollers, system design and data structures. Participated in various labs and practical hands on experience. Completed capstone project on Medical Image Diagnosis Tool using AI and Machine Learning."
     },
     {
-      institution: "Example Community College",
-      duration: "2014 - 2016",
-      major: "Associate's Degree in Information Technology",
-      description: "Learned fundamentals of programming and computer networks. Completed a capstone project on web development."
+      institution: "Cisco Networking Academy",
+      duration: "2018 - 2020",
+      major: "Switching, Routing, Wireless Essentials, Enterprise Networking, Security, and Automation",
+      description: "Learned the fundamentals and theory of switch programming and computer networks. Completed an exam to earn the CCNA certification."
     }
   ];
 
@@ -179,7 +179,8 @@ function App() {
             <nav className={isMenuOpen ? 'open' : ''}>
               <ul>
                 <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
-                <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Work Experience</a></li>
+                <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Experience</a></li>
+                <li><a href="#education" onClick={(e) => smoothScroll(e, '#education')}>Education</a></li>
                 <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
                 <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
                 <li>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
@@ -272,7 +273,6 @@ function App() {
             <h2>My Projects</h2>
             
             <div className="featured-projects">
-              <h3>Featured Projects</h3>
               {projects.filter(project => project.isFeatured).map((project, index) => (
                 <div key={project._id} className={`featured-project ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <div className="project-content">
@@ -307,6 +307,9 @@ function App() {
           <section id='project' className='projects-section'>
             <div className="more-projects">
               <h3>More Projects</h3>
+              <div className="archive-link">
+                <Link to="/archive">View Full Project Archive</Link>
+              </div>
               <div className="projects-grid">
                 {projects.filter(project => !project.isFeatured).slice(0, showMoreProjects ? projects.length : 2).map((project) => (
                   <div key={project._id} className="project-card">
@@ -335,10 +338,6 @@ function App() {
               <button onClick={() => setShowMoreProjects(!showMoreProjects)} className="show-more-btn">
                 {showMoreProjects ? "Show Less" : "Show More"}
               </button>
-            </div>
-            
-            <div className="archive-link">
-              <Link to="/archive">View Full Project Archive</Link>
             </div>
           </section>
 
