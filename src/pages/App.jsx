@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
 import logo from '../assets/case-upper.png';
+import { Github, ExternalLink } from 'lucide-react';
 
 function App() {
   const [welcomeContent, setWelcomeContent] = useState({
@@ -286,12 +287,12 @@ function App() {
                     <div className="project-links">
                       {project.github && (
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <span className="icon github-icon">GitHub</span>
+                          <span className="icon github-icon"><Github /></span>
                         </a>
                       )}
                       {project.external && (
                         <a href={project.external} target="_blank" rel="noopener noreferrer">
-                          <span className="icon external-link-icon">External</span>
+                          <span className="icon external-link-icon"><ExternalLink /></span>
                         </a>
                       )}
                     </div>
@@ -345,7 +346,7 @@ function App() {
 
           <section id="contact" className="contact-section fade-section">
             <h2>Get in Touch</h2>
-            <form onSubmit={handleContactSubmit}>
+            <form className='contact-form' onSubmit={handleContactSubmit}>
               <input
                 type="text"
                 name="name"
