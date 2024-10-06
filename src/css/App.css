@@ -689,16 +689,48 @@ h2 {
 .project-image {
   flex: 1;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content.align-right {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.project-content.align-left {
+  align-items: flex-start;
+  text-align: start;
+}
+
+.project-description {
+  border-radius: var(--border-radius);
+  z-index: 10;
+  min-height: 5rem;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: rgba(33, 28, 46, 1);
 }
 
 .project-image img {
-  max-width: 100%;
+  max-width: 120%;
   height: auto;
   border-radius: 8px;
+  width: 120%;
 }
 
 .technologies {
-  margin: 1rem 0;
+  display: flex;
+  position: relative;
+  z-index: 2;
+  margin: 25px 0px 10px;
+  padding: 0px;
+  list-style: none;
+  width: min-content;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
 }
 
 .tech-tag {

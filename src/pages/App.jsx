@@ -275,9 +275,9 @@ function App() {
             <div className="featured-projects">
               {projects.filter(project => project.isFeatured).map((project, index) => (
                 <div key={project._id} className={`featured-project ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                  <div className="project-content">
+                  <div className={`project-content ${index % 2 === 0 ? 'align-right' : 'align-left'}`}>
                     <h4>{project.title}</h4>
-                    <p>{project.description}</p>
+                    <p className='project-description'>{project.description}</p>
                     <div className="technologies">
                       {project.technologies.map((tech, i) => (
                         <span key={i} className="tech-tag">{tech}</span>
