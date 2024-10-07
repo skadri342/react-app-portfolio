@@ -155,7 +155,7 @@ main {
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-in-out;
   z-index: 1000;
   text-align: center;
-  height: var(--nav-scroll-height);
+  height: auto;
 }
 
 .app-header.scrolled {
@@ -175,7 +175,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
 }
 
 .logo-link {
@@ -185,8 +185,9 @@ main {
 }
 
 .logo {
-  height: 40px;
+  height: 60px;
   width: auto;
+  fill: rgb(255, 100, 80);
 }
 
 .resume-button {
