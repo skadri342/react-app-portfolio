@@ -52,7 +52,7 @@ function App() {
       institution: "Toronto Metropolitan University",
       duration: "2020 - 2025",
       major: "Bachelor of Engineering in Computer Engineering - Co-op",
-      description: "Focused on software engineering, microcontrollers, system design and data structures. Participated in various labs and practical hands on experience. Completed capstone project on Medical Image Diagnosis Tool using AI and Machine Learning."
+      description: "Focused on software engineering, microcontrollers, system design and data structures. Participated in various labs with practical hands on experience. Completed capstone project on Medical Image Diagnosis Tool using AI and Machine Learning."
     },
     {
       institution: "Cisco Networking Academy",
@@ -388,6 +388,12 @@ function App() {
             {submitStatus === 'error' && <p>Error sending message. Please try again.</p>}
           </section>
         </main>
+
+        <footer>
+          <div id = "footer" className='app-footer'>
+            <p><a href='https://github.com/skadri342/react-app-portfolio'>Designed and Built by Shams Kadri</a></p>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -159,7 +159,7 @@ main {
 }
 
 .app-header.scrolled {
-  background-color: rgba(42, 35, 60, 1);
+  background-color: rgba(36, 29, 46, 1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -504,6 +504,10 @@ h2 {
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   color: rgb(180, 130, 160);
+  background-color: rgba(255, 255, 255, 0.1);
+  width: fit-content;
+  border-radius: 4px;
+  padding-right: 4px;
 }
 
 .skills-list li::before {
@@ -914,6 +918,14 @@ h2 {
   margin-top: 1rem;
 }
 
+.featured-project:nth-child(odd) .technologies {
+  justify-content: flex-end;
+}
+
+.featured-project:nth-child(even) .technologies {
+  justify-content: flex-start;
+}
+
 .tech-tag {
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -1085,4 +1097,34 @@ button {
 
 button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+footer p {
+  display: flex;
+  justify-content: space-around;
+}
+
+footer a {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  min-height: 70px;
+  padding: 15px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  line-height: 1.3;
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  color: rgb(180, 130, 160);
+  width: fit-content;
+}
+
+footer a:hover {
+  color: rgb(255, 100, 80);
 }
