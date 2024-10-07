@@ -205,7 +205,7 @@ function App() {
 
         <main>
           <section id="welcome" className="welcome-section fade-section">
-            <p>{welcomeContent.greeting}</p>
+            <p className='greeting'>{welcomeContent.greeting}</p>
             <h1 className='big-heading'>{welcomeContent.name}</h1>
             <h1 className='medium-heading'>{welcomeContent.title}</h1>
             <p className='small-heading'>{welcomeContent.description}</p>
@@ -215,6 +215,7 @@ function App() {
             <div className="bio">
               <h2>{aboutContent.title}</h2>
               <p>{aboutContent.description}</p>
+              <p>Here are a few technologies I&apos;ve been working with recently:</p>
               <ul className='skills-list'>
                 {aboutContent.skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
@@ -248,8 +249,8 @@ function App() {
               </div>
               {workExperiences.length > 0 && (
                 <div className="experience-details">
+                  <h4>{workExperiences[selectedJob].title} @</h4>
                   <h3>{workExperiences[selectedJob].company}</h3>
-                  <h4>{workExperiences[selectedJob].title}</h4>
                   <p className="duration">{workExperiences[selectedJob].duration}</p>
                   <ul className='experience-detail-points'>
                     {workExperiences[selectedJob].descriptionPoints.map((point, index) => (
@@ -276,20 +277,21 @@ function App() {
           </section>
 
           <section id="projects" className="projects-section fade-section">
-            <h2>Things I've Built</h2>
+            <h2>Things I&apos;ve Built</h2>
             
             <div className="featured-projects">
               {projects.filter(project => project.isFeatured).map((project, index) => (
                 <div key={project._id} className={`featured-project ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <div className={`project-content ${index % 2 === 0 ? 'align-right' : 'align-left'}`}>
-                    <h4>{project.title}</h4>
+                    <h4>Featured project</h4>
+                    <h3>{project.title}</h3>
                     <p className='project-description'>{project.description}</p>
                     <div className="technologies">
                       {project.technologies.map((tech, i) => (
                         <span key={i} className="tech-tag">{tech}</span>
                       ))}
                     </div>
-                    <div className="project-links">
+                    <div className="featured-project-links">
                       {project.github && (
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
                           <span className="icon github-icon"><Github /></span>
