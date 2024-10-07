@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
 import logo from '../assets/case-upper.png';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, FolderOpen } from 'lucide-react';
 
 function App() {
   const [welcomeContent, setWelcomeContent] = useState({
@@ -51,7 +51,7 @@ function App() {
     {
       institution: "Toronto Metropolitan University",
       duration: "2020 - 2025",
-      major: "Bachelor of Engineering in Computer Engineering",
+      major: "Bachelor of Engineering in Computer Engineering - Co-op",
       description: "Focused on software engineering, microcontrollers, system design and data structures. Participated in various labs and practical hands on experience. Completed capstone project on Medical Image Diagnosis Tool using AI and Machine Learning."
     },
     {
@@ -174,25 +174,30 @@ function App() {
       <div className="content">
         <header className={`app-header ${isHeaderVisible ? 'visible' : 'hidden'} ${isScrolled ? 'scrolled' : ''}`}>
           <div className="header-content">
-            <Link to="/" className="logo-link">
-              <img src={logo} alt="Logo" className="logo" />
-            </Link>
-            <nav className={isMenuOpen ? 'open' : ''}>
-              <ul>
-                <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
-                <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Experience</a></li>
-                <li><a href="#education" onClick={(e) => smoothScroll(e, '#education')}>Education</a></li>
-                <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
-                <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
-                <li>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
-                <li><Link to="/admin-panel">Admin</Link></li>
-              </ul>
-            </nav>
-            <button className="menu-toggle" onClick={toggleMenu}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            <div className='header-logo'>
+              <Link to="/" className="logo-link">
+                <img src={logo} alt="Logo" className="logo" />
+              </Link>
+            </div>
+            <div className='header-items'>
+              <nav className={isMenuOpen ? 'open' : ''}>
+                <ul>
+                  <li><a href="#about" onClick={(e) => smoothScroll(e, '#about')}>About</a></li>
+                  <li><a href="#experience" onClick={(e) => smoothScroll(e, '#experience')}>Experience</a></li>
+                  <li><a href="#education" onClick={(e) => smoothScroll(e, '#education')}>Education</a></li>
+                  <li><a href="#projects" onClick={(e) => smoothScroll(e, '#projects')}>Projects</a></li>
+                  <li><a href="#contact" onClick={(e) => smoothScroll(e, '#contact')}>Contact</a></li>
+                  <li className='resume-button'>{resumeUrl ? (<a href={resumeUrl} target="_blank" rel="noopener noreferrer">Resume</a>) : (<span>Resume</span>)}</li>
+                  <li className='admin-button'><Link to="/admin-panel">Admin</Link></li>
+                </ul>
+              </nav>
+              
+              <button className="menu-toggle" onClick={toggleMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
           </div>
         </header>
 
@@ -271,7 +276,7 @@ function App() {
           </section>
 
           <section id="projects" className="projects-section fade-section">
-            <h2>My Projects</h2>
+            <h2>Things I've Built</h2>
             
             <div className="featured-projects">
               {projects.filter(project => project.isFeatured).map((project, index) => (
@@ -309,13 +314,28 @@ function App() {
 
           <section id='project' className='projects-section'>
             <div className="more-projects">
-              <h3>More Projects</h3>
+              <h2>More Projects</h2>
               <div className="archive-link">
                 <Link to="/archive">View Full Project Archive</Link>
               </div>
               <div className="projects-grid">
-                {projects.filter(project => !project.isFeatured).slice(0, showMoreProjects ? projects.length : 2).map((project) => (
+                {projects.filter(project => !project.isFeatured).slice(0, showMoreProjects ? projects.length : 3).map((project) => (
                   <div key={project._id} className="project-card">
+                    <div className="project-links">
+                      <div className='folder-icon'><FolderOpen size={48} /></div>
+                      <div className='link-icon'>
+                        {project.github && (
+                          <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            <span className="icon github-icon"><Github /></span>
+                          </a>
+                        )}
+                        {project.external && (
+                          <a href={project.external} target="_blank" rel="noopener noreferrer">
+                            <span className="icon external-link-icon"><ExternalLink /></span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
                     <h4>{project.title}</h4>
                     <p>{project.description}</p>
                     <div className="technologies">
@@ -323,24 +343,14 @@ function App() {
                         <span key={i} className="tech-tag">{tech}</span>
                       ))}
                     </div>
-                    <div className="project-links">
-                      {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <span className="icon github-icon">GitHub</span>
-                        </a>
-                      )}
-                      {project.external && (
-                        <a href={project.external} target="_blank" rel="noopener noreferrer">
-                          <span className="icon external-link-icon">External</span>
-                        </a>
-                      )}
-                    </div>
                   </div>
                 ))}
               </div>
-              <button onClick={() => setShowMoreProjects(!showMoreProjects)} className="show-more-btn">
-                {showMoreProjects ? "Show Less" : "Show More"}
-              </button>
+              {projects.filter(project => !project.isFeatured).length > 3 && (
+                <button onClick={() => setShowMoreProjects(!showMoreProjects)} className="show-more-btn">
+                  {showMoreProjects ? "Show Less" : "Show More"}
+                </button>
+              )}
             </div>
           </section>
 

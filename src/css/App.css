@@ -196,6 +196,22 @@ main {
   width: auto;
 }
 
+.resume-button {
+  border: 1px solid var(--green);
+  border-radius: var(--border-radius);
+  color: var(--green);
+}
+
+.admin-button {
+  border: 1px solid var(--green);
+  border-radius: var(--border-radius);
+  background-color: var(--green);
+}
+
+.admin-button a {
+  color: #020c1b;
+}
+
 nav ul {
   display: flex;
   justify-content: space-around;
@@ -206,6 +222,7 @@ nav ul {
 
 nav ul li {
   margin-left: 2rem;
+  padding: 0.5rem 0.75rem;
 }
 
 nav ul li a {
@@ -254,6 +271,16 @@ nav ul li a:hover {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
   z-index: 1000;
+}
+
+.header-items {
+  display: flex;
+  justify-content: flex-end;
+  width: auto;
+}
+
+.header-logo {
+  width: auto;
 }
 
 @media (max-width: 768px) {
@@ -332,6 +359,10 @@ section {
 h1,
 h2 {
   margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--fz-heading);
 }
 
 /* Welcome Section Styles */
@@ -794,7 +825,6 @@ h2 {
 
 .tech-tag {
   display: inline-block;
-  background-color: rgba(255, 255, 255, 0.2);
   padding: 0.25rem 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
@@ -805,12 +835,28 @@ h2 {
 .project-links {
   display: flex;
   gap: 1rem;
-  width: fit-content;
+  width: auto;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
 .icon {
   font-size: 1.5rem;
   color: #fff;
+}
+
+.link-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: right;
+  width: fit-content;
+  gap: 0.5rem;
+}
+
+.folder-icon {
+  align-items: center;
+  width: fit-content;
 }
 
 .projects-grid {
@@ -827,8 +873,21 @@ h2 {
   transition: transform 0.3s ease;
 }
 
+.project-card h4 {
+  font-size: var(--fz-xl);
+}
+
+.project-card p {
+  margin-top: 1rem;
+  font-size: var(--fz-md);
+}
+
 .project-card:hover {
   transform: translateY(-5px);
+}
+
+.more-projects h2 {
+  text-align: center;
 }
 
 .show-more-btn {
