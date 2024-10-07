@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
-import logo from '../assets/case-upper.png';
+import logo from '../assets/logo.svg';
 import { Github, ExternalLink, FolderOpen } from 'lucide-react';
 
 function App() {
