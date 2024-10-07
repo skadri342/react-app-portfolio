@@ -25,6 +25,7 @@ function AdminLogin() {
 
   return (
     <div className='admin-login-page'>
+      <div className="background"></div>
       <div className="admin-login">
         <h2>Admin Login</h2>
         {error && <p className="error">{error}</p>}
