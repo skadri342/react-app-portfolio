@@ -221,7 +221,7 @@ nav ul {
   padding: 0;
   margin: 0;
   font-family: var(--font-mono);
-  font-size: var(--fz-xs);
+  font-size: var(--fz-sm);
 }
 
 nav ul li {
@@ -395,12 +395,12 @@ h2 {
   margin: 0px 0px 30px 4px;
   color: rgb(255, 100, 80);
   font-family: var(--font-mono);
-  font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
+  font-size: clamp(var(--fz-sm), 4vw, var(--fz-md));
   font-weight: 400;
 }
 
 .big-heading {
-  font-size: clamp(40px, 8vw, 85px);
+  font-size: clamp(30px, 6vw, 85px);
   margin-bottom: 0;
   color: rgb(255, 200, 150);
   font-family: var(--font-sans);
@@ -411,7 +411,7 @@ h2 {
 
 .medium-heading {
   max-width: 800px;
-  font-size: clamp(40px, 8vw, 70px);
+  font-size: clamp(20px, 4vw, 85px);
   color: rgb(180, 130, 160);
   line-height: 0.9;
   font-family: var(--font-sans);
@@ -423,7 +423,7 @@ h2 {
   max-width: 540px;
   color: rgb(180, 130, 160);
   font-family: var(--font-sans);
-  font-size: var(--fz-xl);
+  font-size: clamp(12px, 2vw, 20px);
   line-height: 1.3;
   -webkit-font-smoothing: antialiased;
 }
