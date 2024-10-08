@@ -18,7 +18,9 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: process.env.NODE_ENV === 'production'
+    ? 'https://shamskadri.com'
+    : 'http://localhost:5173', // Replace with your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
 }));

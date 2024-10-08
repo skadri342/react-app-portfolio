@@ -70,9 +70,9 @@ function App() {
     const fetchData = async () => {
       try {
         const [aboutMeResponse, workExperienceResponse, projectsResponse] = await Promise.all([
-          axios.get('http://localhost:3000/api/aboutMe'),
-          axios.get('http://localhost:3000/api/workExperience'),
-          axios.get('http://localhost:3000/api/projects')
+          axios.get(`${import.meta.env.VITE_API_URL}/api/aboutMe`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/workExperience`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/projects`)
         ]);
 
         setWelcomeContent(aboutMeResponse.data.welcomeContent);
@@ -116,8 +116,8 @@ function App() {
   useEffect(() => {
     const fetchResumeUrl = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/resume/url');
-        setResumeUrl(`http://localhost:3000${response.data.url}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/resume/url`);
+        setResumeUrl(`${import.meta.env.VITE_API_URL}${response.data.url}`);
       } catch (error) {
         console.error('Error fetching resume URL:', error);
       }
@@ -159,7 +159,7 @@ function App() {
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/messages', contactForm);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/messages`, contactForm);
       setSubmitStatus('success');
       setContactForm({ name: '', email: '', message: '' });
     } catch (error) {

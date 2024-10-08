@@ -23,7 +23,7 @@ function AboutMeAdmin() {
 
   const fetchAboutMeData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/aboutMe');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/aboutMe`);
       setWelcomeContent(response.data.welcomeContent);
       setAboutContent(response.data.aboutContent);
     } catch (err) {
@@ -36,7 +36,7 @@ function AboutMeAdmin() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put('http://localhost:3000/api/aboutMe', 
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/aboutMe`, 
         { welcomeContent, aboutContent },
         { headers: { 'x-auth-token': token } }
       );

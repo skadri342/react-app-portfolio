@@ -13,9 +13,9 @@ function ResumeUpload() {
 
   const fetchResumeUrl = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/resume/url');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/resume/url`);
       // Construct the full URL
-      setResumeUrl(`http://localhost:3000${response.data.url}`);
+      setResumeUrl(`${import.meta.env.VITE_API_URL}${response.data.url}`);
     } catch (error) {
       console.error('Error fetching resume URL:', error);
       setError('Failed to fetch resume URL');
@@ -38,7 +38,7 @@ function ResumeUpload() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3000/api/resume/upload', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/resume/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'x-auth-token': token

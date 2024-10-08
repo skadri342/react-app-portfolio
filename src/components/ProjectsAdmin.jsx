@@ -21,7 +21,7 @@ function ProjectsAdmin() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/projects');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`);
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -39,12 +39,12 @@ function ProjectsAdmin() {
 
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:3000/api/projects/${currentProject._id}`, projectData, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/api/projects/${currentProject._id}`, projectData, {
           headers: { 'x-auth-token': token }
         });
         console.log('Project updated');
       } else {
-        await axios.post('http://localhost:3000/api/projects', projectData, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, projectData, {
           headers: { 'x-auth-token': token }
         });
         console.log('New project added');
@@ -60,7 +60,7 @@ function ProjectsAdmin() {
   const handleDeleteProject = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/projects/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${id}`, {
         headers: { 'x-auth-token': token }
       });
       fetchProjects();

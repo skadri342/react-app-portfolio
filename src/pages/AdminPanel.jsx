@@ -22,7 +22,7 @@ function AdminPanel() {
       }
 
       try {
-        await axios.get('http://localhost:3000/api/auth/verify', {
+        await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/verify`, {
           headers: { 'x-auth-token': token }
         });
         setIsAuthenticated(true);

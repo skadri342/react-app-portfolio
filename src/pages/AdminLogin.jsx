@@ -14,7 +14,7 @@ function AdminLogin() {
     e.preventDefault();
     try {
       // console.log('Sending password:', password); // Log the password being sent
-      const response = await axios.post('http://localhost:3000/api/auth/login', { username, password, twoFactorToken });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password, twoFactorToken });
       localStorage.setItem('token', response.data.token);
       navigate('/admin-panel');
     } catch (err) {

@@ -13,7 +13,7 @@ function WorkExperienceAdmin() {
 
   const fetchExperiences = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/workExperience');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/workExperience`);
       setExperiences(response.data);
     } catch (error) {
       console.error('Error fetching work experiences:', error);
@@ -25,7 +25,7 @@ function WorkExperienceAdmin() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:3000/api/workExperience', newExperience, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/workExperience`, newExperience, {
         headers: { 'x-auth-token': token }
       });
       console.log('New experience added:', response.data);
@@ -41,7 +41,7 @@ function WorkExperienceAdmin() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:3000/api/workExperience/${editingExperience._id}`, editingExperience, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/workExperience/${editingExperience._id}`, editingExperience, {
         headers: { 'x-auth-token': token }
       });
       setEditingExperience(null);
@@ -55,7 +55,7 @@ function WorkExperienceAdmin() {
   const handleDeleteExperience = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/workExperience/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/workExperience/${id}`, {
         headers: { 'x-auth-token': token }
       });
       fetchExperiences();

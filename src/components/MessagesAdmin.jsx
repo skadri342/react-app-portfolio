@@ -14,7 +14,7 @@ function MessagesAdmin() {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:3000/api/messages', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}api/messages`, {
         headers: { 'x-auth-token': token }
       });
       setMessages(response.data);
@@ -29,7 +29,7 @@ function MessagesAdmin() {
     if (!message.isRead) {
       try {
         const token = localStorage.getItem('token');
-        await axios.patch(`http://localhost:3000/api/messages/${message._id}/read`, {}, {
+        await axios.patch(`${import.meta.env.VITE_API_URL}/api/messages/${message._id}/read`, {}, {
           headers: { 'x-auth-token': token }
         });
         fetchMessages();
@@ -42,7 +42,7 @@ function MessagesAdmin() {
   const handleDeleteMessage = async (messageId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3000/api/messages/${messageId}/delete`, {}, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/messages/${messageId}/delete`, {}, {
         headers: { 'x-auth-token': token }
       });
       fetchMessages();
@@ -57,7 +57,7 @@ function MessagesAdmin() {
   const handleRestoreMessage = async (messageId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3000/api/messages/${messageId}/restore`, {}, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/messages/${messageId}/restore`, {}, {
         headers: { 'x-auth-token': token }
       });
       fetchMessages();
@@ -69,7 +69,7 @@ function MessagesAdmin() {
   const handlePermanentDelete = async (messageId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/messages/${messageId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/messages/${messageId}`, {
         headers: { 'x-auth-token': token }
       });
       fetchMessages();
