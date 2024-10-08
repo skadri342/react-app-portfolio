@@ -270,7 +270,7 @@ nav ul li a:hover {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #FFFFFF;
+  background-color: rgb(255, 100, 80);
   margin: 5px 0;
   transition: all 0.3s ease;
 }
@@ -834,6 +834,7 @@ h2 {
 
 .projects-section h2 {
   padding: 0 1rem;
+  font-size: clamp(22px, 2vw, 35px);
 }
 
 .featured-projects,
@@ -856,12 +857,13 @@ h2 {
 }
 
 .featured-project h3 {
-  font-size: clamp(24px, 5vw, 28px);
+  font-size: clamp(18px, 2vw, 25px);
   font-weight: 600;
   line-height: 1.1;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   color: rgb(255, 200, 150);
+  width: 90%;
 }
 
 .featured-project.even {
@@ -973,6 +975,7 @@ h2 {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
+  width: 90%;
 }
 
 .featured-project:nth-child(odd) .technologies {
@@ -981,6 +984,73 @@ h2 {
 
 .featured-project:nth-child(even) .technologies {
   justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .featured-project {
+    position: relative;
+    display: block;
+    margin-bottom: 4rem;
+  }
+
+  .featured-project .project-image {
+    width: 100%;
+    padding: 0;
+  }
+
+  .featured-project .image-overlay {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .featured-project .image-overlay::after {
+    content: none;
+  }
+
+  .featured-project .project-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(69, 34, 52, 0.93);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    z-index: 10;
+  }
+
+  .featured-project .project-content h3,
+  .featured-project .project-content h4,
+  .featured-project .project-content .project-description,
+  .featured-project .project-content .technologies,
+  .featured-project .project-content .featured-project-links {
+    max-width: 100%;
+  }
+
+  .featured-project .project-content .project-description {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .featured-project.even .project-content,
+  .featured-project.odd .project-content {
+    align-items: flex-start;
+    text-align: left;
+    border-radius: 8px;
+  }
+
+  .featured-project .technologies {
+    justify-content: flex-start;
+  }
+
+  .featured-project:nth-child(odd) .technologies {
+    justify-content: flex-start;
+  }
 }
 
 .tech-tag {
@@ -1074,9 +1144,9 @@ h2 {
   display: block;
   margin: 2rem auto 0;
   padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(255, 100, 80);
+  border: 2px solid rgb(255, 100, 80);
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;

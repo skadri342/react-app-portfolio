@@ -13,7 +13,7 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Sending password:', password); // Log the password being sent
+      // console.log('Sending password:', password); // Log the password being sent
       const response = await axios.post('http://localhost:3000/api/auth/login', { username, password, twoFactorToken });
       localStorage.setItem('token', response.data.token);
       navigate('/admin-panel');
