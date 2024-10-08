@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import App from './pages/App.jsx'
+import App from './pages/App.js'
 import AdminLogin from './pages/AdminLogin.js'
 import AdminPanel from './pages/AdminPanel.js'
 import { AdminProvider } from './context/AdminContext.js'
