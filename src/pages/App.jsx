@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/App.css';
 import backgroundImage from '../assets/sunset-ship-image.jpeg';
-import { Github, ExternalLink, FolderOpen } from 'lucide-react';
+import { ExternalLink, FolderOpen } from 'lucide-react';
+import { SiInstagram, SiGithub, SiLinkedin, SiDiscord } from '@icons-pack/react-simple-icons';
 
 function App() {
   const [welcomeContent, setWelcomeContent] = useState({
@@ -368,7 +369,7 @@ function App() {
                     <div className="featured-project-links">
                       {project.github && (
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <span className="icon github-icon"><Github /></span>
+                          <span className="icon github-icon"><SiGithub /></span>
                         </a>
                       )}
                       {project.external && (
@@ -402,7 +403,7 @@ function App() {
                       <div className='link-icon'>
                         {project.github && (
                           <a href={project.github} target="_blank" rel="noopener noreferrer">
-                            <span className="icon github-icon"><Github /></span>
+                            <span className="icon github-icon"><SiGithub /></span>
                           </a>
                         )}
                         {project.external && (
@@ -462,6 +463,19 @@ function App() {
             {submitStatus === 'error' && <p>Error sending message. Please try again.</p>}
           </section>
         </main>
+
+        <div className="social-links">
+          <ul>
+            <li><a href="https://github.com/skadri342" target="_blank" rel="noopener noreferrer"><SiGithub /></a></li>
+            <li><a href="https://www.linkedin.com/in/shamskadri/" target="_blank" rel="noopener noreferrer"><SiLinkedin /></a></li>
+            <li><a href="https://www.instagram.com/shams.kadri/" target="_blank" rel="noopener noreferrer"><SiInstagram /></a></li>
+            <li><a href="" target="_blank" rel="noopener noreferrer"><SiDiscord /></a></li>
+          </ul>
+        </div>
+
+        <div className="email-link">
+          <a href="mailto:quadrishams342@gmail.com">quadrishams342@gmail.com</a>
+        </div>
 
         <footer>
           <div id = "footer" className='app-footer'>
