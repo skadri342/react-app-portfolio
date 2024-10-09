@@ -50,7 +50,7 @@ The website's content is managed through a custom-built Content Management Syste
 
 ## Future Development
 
-For information on planned features and improvements, please refer to the [RELEASE_NOTES.md](./RELEASE_NOTES.md) file.
+For information on planned features and improvements, please refer to the [RELEASE_NOTES.md](./release-notes.md) file.
 
 ## Getting Started
 
