@@ -19,8 +19,8 @@ connectDB();
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? 'https://react-app-portfolio-frontend.onrender.com'
-    : 'http://localhost:5173', // Replace with your frontend URL
+    ? '192.168.2.132'
+    : 'http://localhost:3000', // Replace with your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token'],
 }));
@@ -34,5 +34,5 @@ app.use('/api/aboutMe', aboutMeRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/resume', resumeRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
