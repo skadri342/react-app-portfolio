@@ -14,7 +14,7 @@ function MessagesAdmin() {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}api/messages`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/messages`, {
         headers: { 'x-auth-token': token }
       });
       setMessages(response.data);
