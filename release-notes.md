@@ -1,5 +1,19 @@
 # Release Notes
 
+## [v1.1] -  [October 14th, 2024]
+
+### Improvements
+- Enhanced mobile responsiveness across the website
+- Optimized layout for smaller screen sizes
+
+### Bug Fixes
+- Reduced page-wide margins on mobile devices for better space utilization
+- Fixed an issue where text was overflowing from project section boxes on smaller viewports
+
+### Details
+- The website now provides a more polished and consistent experience on mobile devices
+- Content is now properly contained within designated areas, improving readability and overall user experience on smaller screens
+
 ## Version 1.0 (Initial Release) - [October 9th, 2024]
 
 I'm excited to announce the first iteration of my personal portfolio website. This release marks the foundation of a dynamic and interactive platform to showcase professional achievements, skills, and projects.
