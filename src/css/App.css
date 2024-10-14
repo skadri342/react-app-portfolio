@@ -131,13 +131,6 @@ main {
 }
 
 /* Media query for mobile devices */
-@media (max-width: 480px) {
-  .app {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-}
-
 @media (max-width: 1173px) {
   main {
     padding: 0 100px;
@@ -150,7 +143,12 @@ main {
   }
 }
 
-@media (max-width: 372px) {
+@media (max-width: 480px) {
+  .app {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
   main {
     padding: 0 25px;
   }
@@ -429,7 +427,7 @@ h2 {
   max-width: 540px;
   color: rgb(180, 130, 160);
   font-family: var(--font-sans);
-  font-size: clamp(12px, 2vw, 20px);
+  font-size: clamp(13px, 2vw, 20px);
   line-height: 1.3;
   -webkit-font-smoothing: antialiased;
 }
@@ -453,7 +451,7 @@ h2 {
 
 .bio p {
   font-family: var(--font-sans);
-  font-size: clamp(10px, 2vw, 18px);
+  font-size: clamp(13px, 2vw, 18px);
   line-height: 1.3;
   color: rgb(180, 130, 160);
   margin-bottom: 1rem;
@@ -515,7 +513,7 @@ h2 {
   margin-bottom: 10px;
   padding-left: 20px;
   font-family: var(--font-mono);
-  font-size: clamp(8px, 2vw, 13px);
+  font-size: clamp(12px, 2vw, 13px);
   color: rgb(180, 130, 160);
   background-color: rgba(255, 255, 255, 0.1);
   width: fit-content;
@@ -694,9 +692,10 @@ h2 {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
   .experience-selector {
     justify-content: flex-start;
+    overflow-x: auto;
   }
 }
 
@@ -727,7 +726,7 @@ h2 {
   unicode-bidi: isolate;
   color: rgb(180, 130, 160);
   font-family: var(--font-sans);
-  font-size: clamp(10px, 2vw, 16px);
+  font-size: clamp(12px, 2vw, 16px);
   line-height: 1.3;
   -webkit-font-smoothing: antialiased;
 }
@@ -845,7 +844,10 @@ h2 {
 .featured-project {
   display: flex;
   margin-bottom: 4rem;
-  align-items: center;
+  align-items: stretch;
+  /* This will make both sides equal height */
+  min-height: 300px;
+  /* Set a minimum height */
 }
 
 .featured-project h4 {
@@ -881,9 +883,14 @@ h2 {
 .project-content,
 .project-image {
   flex: 1;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+}
+
+.project-content {
+  justify-content: space-between;
+  /* This will spread out the content */
 }
 
 .project-image {
@@ -913,7 +920,6 @@ h2 {
 .project-description {
   border-radius: var(--border-radius);
   z-index: 10;
-  min-height: 5rem;
   margin-top: 20px;
   padding: 10px 20px;
   background-color: rgba(69, 34, 52, 1);
@@ -989,38 +995,57 @@ h2 {
 @media (max-width: 768px) {
   .featured-project {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 4rem;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 400px;
+    /* Adjust this value as needed */
   }
 
   .featured-project .project-image {
-    width: 100%;
-    padding: 0;
-  }
-
-  .featured-project .image-overlay {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .featured-project .image-overlay::after {
-    content: none;
-  }
-
-  .featured-project .project-content {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(69, 34, 52, 0.93);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .featured-project .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .featured-project .image-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(69, 34, 52, 0.95);
+    /* Adjust opacity as needed */
+  }
+
+  .featured-project .image-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured-project .project-content {
+    position: relative;
+    z-index: 2;
     padding: 2rem;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    z-index: 10;
   }
 
   .featured-project .project-content h3,
@@ -1035,21 +1060,38 @@ h2 {
     background-color: transparent;
     padding: 0;
     box-shadow: none;
+    margin-top: 1rem;
+    color: rgb(180, 130, 160);
+    /* Adjust for better readability */
   }
 
   .featured-project.even .project-content,
   .featured-project.odd .project-content {
     align-items: flex-start;
     text-align: left;
-    border-radius: 8px;
   }
 
   .featured-project .technologies {
     justify-content: flex-start;
+    margin-top: 1rem;
   }
 
-  .featured-project:nth-child(odd) .technologies {
+  .featured-project:nth-child(odd) .technologies,
+  .featured-project:nth-child(even) .technologies {
     justify-content: flex-start;
+  }
+
+  .featured-project h3 {
+    font-size: clamp(18px, 4vw, 22px);
+    width: 100%;
+  }
+
+  .featured-project-links {
+    margin-top: 1rem;
+  }
+
+  .tech-tag {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
