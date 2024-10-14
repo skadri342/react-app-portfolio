@@ -72,4 +72,3 @@ While this initial release provides a solid foundation, I have some plans for fu
    - Develop a blog section for sharing articles and thoughts on various topics.
 
 Some of these future plans are very ambitious so they may not even come to fruition but stay tuned for  updates in future releases.
-
