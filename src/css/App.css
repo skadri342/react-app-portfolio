@@ -889,7 +889,7 @@ h2 {
 }
 
 .project-content {
-  justify-content: space-between;
+  justify-content: center;
   /* This will spread out the content */
 }
 
